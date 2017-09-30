@@ -11,11 +11,11 @@
 /.DS_Store
 *.DS_Store
 
-# Ignore database.yml
-config/database.yml
-
 # Ignore application.yml
 config/application.yml
+
+# Ignore secret.yml
+config/secret.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*
