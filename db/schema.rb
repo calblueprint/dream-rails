@@ -26,18 +26,19 @@ ActiveRecord::Schema.define(version: 20171007012116) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.boolean "is_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teachers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "dream_id"
     t.string "email"
     t.string "phone"
-=======
-  create_table "courses", force: :cascade do |t|
-    t.string "title"
-    t.boolean "is_active"
->>>>>>> Fixed and tested attendance controllers
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
