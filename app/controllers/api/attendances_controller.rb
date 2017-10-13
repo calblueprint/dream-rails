@@ -37,6 +37,19 @@ class Api::AttendancesController < Api::BaseController
     end
   end
 
+  def attendance_sheet
+    puts params
+    @attendances = Attendance.where(params)
+    if @attendances.any?
+      render json: @attendances
+    else
+      error_response(@attendances)
+    end
+  end
+
+  def create_attendance_sheet
+  end
+
   def create_params
     params.require(:attendance).permit(
       :student_id,
