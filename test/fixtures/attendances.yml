@@ -5,7 +5,7 @@
 #  id              :integer          not null, primary key
 #  student_id      :integer
 #  course_id       :integer
-#  date            :datetime
+#  date            :date
 #  attendance_type :integer          default(0)
 #  comment         :string
 #  is_synced       :boolean          default(FALSE)
