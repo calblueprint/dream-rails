@@ -38,7 +38,6 @@ class Api::StudentsController < Api::BaseController
 	end
 
 	private
-
 	def student_params
 		params.require(:student).permit(
       :first_name,
