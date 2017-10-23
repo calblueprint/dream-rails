@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20171014004018) do
   create_table "attendances", force: :cascade do |t|
     t.integer "student_id"
     t.integer "course_id"
-    t.date "date"
+    t.datetime "date"
     t.integer "attendance_type", default: 0
     t.string "comment"
     t.boolean "is_synced", default: false
@@ -47,16 +47,6 @@ ActiveRecord::Schema.define(version: 20171014004018) do
     t.integer "course_id"
     t.integer "teacher_id"
     t.date "birthday"
-  end
-
-  create_table "teachers", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "dream_id"
-    t.string "email"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "teachers", force: :cascade do |t|
