@@ -37,6 +37,15 @@ class Api::AttendancesController < Api::BaseController
     end
   end
 
+  def attendance_item
+    @attendance = Attendance.find_by(create_params)
+    if @attendance
+      render json: @attendance
+    else
+      create
+    end
+  end
+
   def create_params
     params.require(:attendance).permit(
       :student_id,
