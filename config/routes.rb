@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :courses
+    resources :courses, shallow: true do
+      resources :students
+    end
   	resources :teachers
-    resources :students
     resources :attendances do
       collection do
-        get :attendance_sheet
+        post :attendance_item
       end
     end
   end

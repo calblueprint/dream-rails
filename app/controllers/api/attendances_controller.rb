@@ -37,17 +37,13 @@ class Api::AttendancesController < Api::BaseController
     end
   end
 
-  def attendance_sheet
-    @attendances = Attendance.where(sheet_params)
-    if @attendances.any?
-      render json: @attendances
+  def attendance_item
+    @attendance = Attendance.find_by(create_params)
+    if @attendance
+      render json: @attendance
     else
-      error_response(@attendances)
+      create
     end
-  end
-
-  def create_attendance_sheet
-
   end
 
   def create_params
@@ -64,14 +60,6 @@ class Api::AttendancesController < Api::BaseController
       :attendance_type,
       :comment,
       :is_synced
-    )
-  end
-
-  def sheet_params
-    params.permit(
-      :course_id,
-      :date,
-      :attendance
     )
   end
 end

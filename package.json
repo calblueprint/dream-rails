@@ -1,5 +1,7 @@
 {
   "name": "dream-rails",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
 }
