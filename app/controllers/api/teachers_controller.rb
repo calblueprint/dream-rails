@@ -13,7 +13,7 @@ class Api::TeachersController < Api::BaseController
       if @teacher.save
         render json: @teacher
       else
-        render 'new'
+        error_response(@teacher)
       end
     end
 
@@ -23,7 +23,7 @@ class Api::TeachersController < Api::BaseController
       if @teacher.update(teacher_params)
         render json: @teacher
       else
-        render 'edit'
+        error_response(@teacher)
       end
     end
 
@@ -43,9 +43,11 @@ class Api::TeachersController < Api::BaseController
 
     def destroy
       @teacher = Teacher.find(params[:id])
-      @teacher.destroy
-     
-      redirect_to teachers_path
+      if @teacher.destroy
+        render json: @teacher
+      else
+        error_response(@teacher)
+      end
     end
 
     private
