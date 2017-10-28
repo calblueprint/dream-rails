@@ -11,6 +11,9 @@
 /.DS_Store
 *.DS_Store
 
+# Ignore database.yml
+config/database.yml
+
 # Ignore application.yml
 config/application.yml
 
