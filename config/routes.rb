@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :teachers
+
   namespace :api do
     resources :courses, shallow: true do
       resources :students

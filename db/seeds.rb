@@ -12,7 +12,9 @@ def make_teachers
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       dream_id: Faker::Number.number(7),
-      email: Faker::Internet.free_email(),
+      email: "user#{n}@gmail.com",
+      password: "password",
+      password_confirmation: "password",
       phone: Faker::PhoneNumber.phone_number,
     )
     teacher.id = n
@@ -49,7 +51,7 @@ def make_students
   end
 end
 
-def make_atendances
+def make_attendances
   1.upto(25) do |n|
     1.upto(5) do |m|
       attendance = Attendance.create(
@@ -70,4 +72,4 @@ end
 make_teachers
 make_courses
 make_students
-make_atendances
+make_attendances

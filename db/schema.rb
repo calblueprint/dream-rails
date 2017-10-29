@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20171106032512) do
     t.string "first_name"
     t.string "last_name"
     t.string "dream_id"
-    t.string "email"
+    t.string "email", default: "", null: false
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
