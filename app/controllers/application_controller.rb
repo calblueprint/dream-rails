@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery with: [:exception, :null_session]
 
   def not_found_response
     error_response(nil, "Not Found", 404)
