@@ -46,8 +46,4 @@ class AddDeviseToTeachers < ActiveRecord::Migration[5.1]
     raise ActiveRecord::IrreversibleMigration
   end
 
-  def change
-    change_column :teachers, :email, :string, null: false, default: ""
-
-  end
 end
