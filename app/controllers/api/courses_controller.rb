@@ -13,10 +13,9 @@ class Api::CoursesController < Api::BaseController
   def create
     course = Course.new(course_params)
     errors = []
-    update_teacher("teacher_id1", course, errors)
-    update_teacher("teacher_id2", course, errors)
+    add_teacher("teacher_id1", course, errors)
+    add_teacher("teacher_id2", course, errors)
     if errors.present?
-      puts(errors) # DELETE
       return render_error_response(:forbidden, errors)
     end
     if course.save
@@ -32,7 +31,6 @@ class Api::CoursesController < Api::BaseController
     update_teacher("teacher_id1", course, errors)
     update_teacher("teacher_id2", course, errors)
     if errors.present?
-      puts(errors) # DELETE
       return render_error_response(:forbidden, errors)
     end
     if course.update(course_params)
@@ -53,33 +51,26 @@ class Api::CoursesController < Api::BaseController
 
   private
 
+  def add_teacher(t_id, course, errors)
+    if course_params.key?(t_id) && course_params[t_id].present?
+      if Teacher.exists?(dream_id: course_params[t_id])
+        new_t = Teacher.where(dream_id: course_params[t_id])
+        course.teachers << new_t
+      else
+        errors << "No teacher with ID " + course_params[t_id].to_s
+      end
+    end
+  end
+
   def update_teacher(t_id, course, errors)
     if course_params.key?(t_id)
       course_teacher_id = course.attributes[t_id]
-      params_teacher_id = course_params[t_id]
-
-      # Remove old teacher
-      puts("do not equal each other? ", course_teacher_id != params_teacher_id)
-      if course_teacher_id.present? && course_teacher_id != params_teacher_id
-        puts("REMOVING TEACHER NOWW!!!")
-        puts("course_teacher_id: ", course_teacher_id)
-        puts("params_teacher_id: ", params_teacher_id)
-        puts("TEACHERS BEFORE REMOVE")
-        puts(course.teachers)
+      if course_teacher_id.present? && course_teacher_id != course_params[t_id]
+        # Remove old teacher
         filtered_teachers = course.teachers.select { |old_t| old_t.dream_id != course_teacher_id }
         course.teachers = filtered_teachers
-        puts("TEACHERS AFTER REMOVE")
-        puts(course.teachers)
-      end
-
-      # Add teacher
-      if Teacher.exists?(dream_id: params_teacher_id)
-        new_t = Teacher.where(dream_id: params_teacher_id)
-        course.teachers << new_t
-        puts("TEACHERS AFTER ADD")
-        puts(course.teachers)
-      else
-        errors << "No teacher with ID " + params_teacher_id.to_s
+        # Add new teacher
+        add_teacher(t_id, course, errors)
       end
     end
   end
@@ -95,6 +86,6 @@ class Api::CoursesController < Api::BaseController
       :end_time,
       :teacher_id1,
       :teacher_id2
-    ).reject{|_, v| v.blank?}
+    )
   end
 end
