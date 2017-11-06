@@ -40,6 +40,6 @@ class Api::CoursesController < Api::BaseController
   private
 
   def course_params
-    params.permit(:title, :is_active)
+    params.permit(:title, :is_active, :start_date, :end_date, :weekday, :start_time, :end_time, :teacher_id1, :teacher_id2)
   end
 end
