@@ -52,7 +52,7 @@ class Api::CoursesController < Api::BaseController
   private
 
   def add_teacher(t_id, course, errors)
-    if course_params.key?(t_id) && course_params[t_id].present?
+    if course_params[t_id].present?
       if Teacher.exists?(dream_id: course_params[t_id])
         new_t = Teacher.where(dream_id: course_params[t_id])
         course.teachers << new_t
@@ -63,15 +63,15 @@ class Api::CoursesController < Api::BaseController
   end
 
   def update_teacher(t_id, course, errors)
-    if course_params.key?(t_id)
-      course_teacher_id = course.attributes[t_id]
-      if course_teacher_id.present? && course_teacher_id != course_params[t_id]
-        # Remove old teacher
+    course_teacher_id = course.attributes[t_id]
+    if course_teacher_id != course_params[t_id]
+      # Remove old teacher
+      if course_teacher_id.present?
         filtered_teachers = course.teachers.select { |old_t| old_t.dream_id != course_teacher_id }
         course.teachers = filtered_teachers
-        # Add new teacher
-        add_teacher(t_id, course, errors)
       end
+      # Add new teacher
+      add_teacher(t_id, course, errors)
     end
   end
 
