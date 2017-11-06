@@ -14,5 +14,6 @@
 
 class Teacher < ApplicationRecord
   has_many :students
+  has_many :courses
 	validates :first_name, :last_name, :dream_id, :email, :phone, presence: true
 end
