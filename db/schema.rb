@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171106032512) do
+ActiveRecord::Schema.define(version: 20171106210141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20171106032512) do
     t.string "weekday"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer "teacher_id1"
-    t.integer "teacher_id2"
+    t.string "teacher_id1"
+    t.string "teacher_id2"
   end
 
   create_table "courses_teachers", id: false, force: :cascade do |t|
