@@ -3,7 +3,7 @@ class Api::CoursesController < Api::BaseController
   skip_before_action :verify_authenticity_token
 
   def index
-    render json: Course.all
+    render json: Course.order(:id).all
   end
 
   def show
