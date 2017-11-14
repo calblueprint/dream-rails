@@ -18,6 +18,8 @@ class Api::CoursesController < Api::BaseController
     if errors.present?
       return render_error_response(:forbidden, errors)
     end
+
+    update_sessions(course)
     if course.save
       render json: course
     else
@@ -27,16 +29,21 @@ class Api::CoursesController < Api::BaseController
 
   def update
     course = Course.find(params[:id])
+    if course.nil?
+      return render_error_message(:forbidden, errors: ["Failed to update course."])
+    end
     errors = []
     update_teacher("teacher_id1", course, errors)
     update_teacher("teacher_id2", course, errors)
     if errors.present?
       return render_error_response(:forbidden, errors)
     end
+
+    update_sessions(course)
     if course.update(course_params)
       render json: course
     else
-      error_response(course)
+      render_error_response(:forbidden, course.errors.full_messages)
     end
   end
 
@@ -45,11 +52,29 @@ class Api::CoursesController < Api::BaseController
     if course.destroy
       render json: course
     else
-      error_response(course)
+      render_error_response(:forbidden, course.errors.full_messages)
+    end
+  end
+
+  def sessions
+    course = Course.find(params[:id])
+    if !course.nil?
+      render json: { sessions: course.sessions.order(:number) }
+    else
+      render_error_response(:forbidden, ["Could not retrieve sessions."])
     end
   end
 
   private
+
+  def update_sessions(course)
+    params[sessions].each do |session_id|
+      session = Session.find(session_id)
+      unless course.sessions.include?(session)
+        course.sessions << session
+      end
+    end
+  end
 
   def add_teacher(t_id, course, errors)
     if course_params[t_id].present?
@@ -85,7 +110,7 @@ class Api::CoursesController < Api::BaseController
       :start_time,
       :end_time,
       :teacher_id1,
-      :teacher_id2
+      :teacher_id2,
     )
   end
 end

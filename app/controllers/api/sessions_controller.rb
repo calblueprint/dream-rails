@@ -5,7 +5,9 @@ class Api::SessionsController < Api::BaseController
   def create
     session = Session.new(session_params)
     if session.save
-      render json: session
+      render json: {
+        session_id: session.id
+      }
     else
       render_error_response(:forbidden, session.errors.full_messages)
     end
