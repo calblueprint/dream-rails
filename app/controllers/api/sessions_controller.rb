@@ -2,10 +2,6 @@ class Api::SessionsController < Api::BaseController
   # TODO(caseytaka): fix authentication
   skip_before_action :verify_authenticity_token
 
-  def index
-    render json: Session.order(:number).all
-  end
-
   def create
     session = Session.new(session_params)
     if session.save
