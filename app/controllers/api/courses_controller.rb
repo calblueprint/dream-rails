@@ -16,6 +16,7 @@ class Api::CoursesController < Api::BaseController
     add_teacher("teacher_id1", course, errors)
     add_teacher("teacher_id2", course, errors)
     if errors.present?
+      puts "ERRORS ARE PRESENT"
       return render_error_response(:forbidden, errors)
     end
 
@@ -23,6 +24,7 @@ class Api::CoursesController < Api::BaseController
     if course.save
       render json: course
     else
+      puts "CREATION ERROR"
       render_error_response(:forbidden, course.errors.full_messages)
     end
   end
@@ -68,10 +70,12 @@ class Api::CoursesController < Api::BaseController
   private
 
   def update_sessions(course)
-    params[sessions].each do |session_id|
-      session = Session.find(session_id)
-      unless course.sessions.include?(session)
-        course.sessions << session
+    if params.key?("sessions") && params[sessions].any?
+      params[sessions].each do |session_id|
+        session = Session.find(session_id)
+        unless course.sessions.include?(session)
+          course.sessions << session
+        end
       end
     end
   end
