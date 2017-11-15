@@ -16,7 +16,6 @@ class Api::CoursesController < Api::BaseController
     add_teacher("teacher_id1", course, errors)
     add_teacher("teacher_id2", course, errors)
     if errors.present?
-      puts "ERRORS ARE PRESENT"
       return render_error_response(:forbidden, errors)
     end
 
@@ -24,7 +23,6 @@ class Api::CoursesController < Api::BaseController
     if course.save
       render json: course
     else
-      puts "CREATION ERROR"
       render_error_response(:forbidden, course.errors.full_messages)
     end
   end
