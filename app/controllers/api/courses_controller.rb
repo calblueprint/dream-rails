@@ -19,7 +19,6 @@ class Api::CoursesController < Api::BaseController
       return render_error_response(:forbidden, errors)
     end
 
-    update_sessions(course)
     if course.save
       render json: course
     else
@@ -39,7 +38,6 @@ class Api::CoursesController < Api::BaseController
       return render_error_response(:forbidden, errors)
     end
 
-    update_sessions(course)
     if course.update(course_params)
       render json: course
     else
@@ -57,7 +55,7 @@ class Api::CoursesController < Api::BaseController
   end
 
   def sessions
-    course = Course.find(params[:id])
+    course = Course.find(params[:course_id])
     if !course.nil?
       render json: { sessions: course.sessions.order(:number) }
     else
@@ -66,17 +64,6 @@ class Api::CoursesController < Api::BaseController
   end
 
   private
-
-  def update_sessions(course)
-    if params.key?("sessions") && params[sessions].any?
-      params[sessions].each do |session_id|
-        session = Session.find(session_id)
-        unless course.sessions.include?(session)
-          course.sessions << session
-        end
-      end
-    end
-  end
 
   def add_teacher(t_id, course, errors)
     if course_params[t_id].present?

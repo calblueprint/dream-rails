@@ -3,6 +3,9 @@ class Api::SessionsController < Api::BaseController
   skip_before_action :verify_authenticity_token
 
   def create
+    puts "SESSION CREATE PARAMS"
+    puts params
+    puts "END PARAMS"
     session = Session.new(session_params)
     if session.save
       render json: {
@@ -39,6 +42,7 @@ class Api::SessionsController < Api::BaseController
       :start_time,
       :end_time,
       :number,
+      :course_id,
     )
   end
 end
