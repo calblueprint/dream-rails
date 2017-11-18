@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171106032512) do
+ActiveRecord::Schema.define(version: 20171114034749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,24 @@ ActiveRecord::Schema.define(version: 20171106032512) do
     t.string "weekday"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer "teacher_id1"
-    t.integer "teacher_id2"
+    t.string "teacher_id1"
+    t.string "teacher_id2"
   end
 
   create_table "courses_teachers", id: false, force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "teacher_id", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "weekday"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_sessions_on_course_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -59,6 +70,7 @@ ActiveRecord::Schema.define(version: 20171106032512) do
     t.integer "course_id"
     t.integer "teacher_id"
     t.date "birthday"
+    t.string "dream_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -82,4 +94,5 @@ ActiveRecord::Schema.define(version: 20171106032512) do
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "sessions", "courses"
 end
