@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 
   def not_found_response
     error_response(nil, "Not Found", 404)
@@ -11,5 +12,9 @@ class ApplicationController < ActionController::Base
 
   def error_response(object, message = nil, status = nil)
     render json: Error.new(object, message), serializer: ErrorSerializer, status: status || 400
+  end
+
+  def render_error_response(status, errors)
+    render json: { errors: errors }, status: status
   end
 end
