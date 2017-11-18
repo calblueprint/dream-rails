@@ -4,16 +4,16 @@ class Api::StudentsController < Api::BaseController
 
   def index
     if params[:course_id]
-      @student = Course.find(params[:course_id]).students
-      render json: @student
+      student = Course.find(params[:course_id]).students
+      render json: student
     else
 		    render json: Student.all
     end
   end
 
 	def show
-    @student = Student.find(params[:id])
-    render json: @student
+    student = Student.find(params[:id])
+    render json: student
 	end
 
 	def create
@@ -26,20 +26,20 @@ class Api::StudentsController < Api::BaseController
 	end
 
 	def update
-  	@student = Student.find(params[:id])
-   	if @student.update(student_params)
-   		render json: @student
+  	student = Student.find(params[:id])
+   	if student.update(student_params)
+   		render json: student
    	else
-   		error_response(@student)
+   		error_response(student)
    	end
    end
 
 	def destroy
-		@student = Student.find(params[:id])
-		if @student.destroy
-			render json: @student
+		student = Student.find(params[:id])
+		if student.destroy
+			render json: student
 		else
-			error_response(@student)
+			error_response(student)
 		end
 	end
 
@@ -53,6 +53,7 @@ class Api::StudentsController < Api::BaseController
         :address,
         :course_id,
         :teacher_id,
+        :dream_id,
       )
   	end
 end
