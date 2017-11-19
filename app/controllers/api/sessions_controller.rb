@@ -3,9 +3,6 @@ class Api::SessionsController < Api::BaseController
   skip_before_action :verify_authenticity_token
 
   def create
-    puts "SESSION CREATE PARAMS"
-    puts params
-    puts "END PARAMS"
     session = Session.new(session_params)
     if session.save
       render json: {
