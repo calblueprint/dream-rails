@@ -1,9 +1,10 @@
 class Api::CoursesController < Api::BaseController
-  # TODO(caseytaka): fix authentication
-  skip_before_action :verify_authenticity_token
 
   def index
-    render json: Course.order(:id).all
+    if params[:teacher_id]
+      render json: Course.where(teacher_id1: params[:teacher_id]).or(
+                   Course.where(teacher_id2: params[:teacher_id]))
+    end
   end
 
   def show
@@ -113,6 +114,7 @@ class Api::CoursesController < Api::BaseController
       :end_time,
       :teacher_id1,
       :teacher_id2,
+      :teacher_id
     )
   end
 end

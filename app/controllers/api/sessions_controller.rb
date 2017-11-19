@@ -1,6 +1,4 @@
 class Api::SessionsController < Api::BaseController
-  # TODO(caseytaka): fix authentication
-  skip_before_action :verify_authenticity_token
 
   def create
     session = Session.new(session_params)

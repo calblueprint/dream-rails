@@ -1,5 +1,4 @@
 class Api::TeachersController < Api::BaseController
-    skip_before_action :verify_authenticity_token
 
     def update
       @teacher = Teacher.find(params[:id])

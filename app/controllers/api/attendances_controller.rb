@@ -1,6 +1,4 @@
 class Api::AttendancesController < Api::BaseController
-  # TODO: fix
-  skip_before_action :verify_authenticity_token
 
   def index
     render json: Attendance.all
