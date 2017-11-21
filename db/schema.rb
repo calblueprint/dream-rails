@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114034749) do
+ActiveRecord::Schema.define(version: 20171119032821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,6 @@ ActiveRecord::Schema.define(version: 20171114034749) do
     t.datetime "updated_at", null: false
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string "weekday"
-    t.datetime "start_time"
-    t.datetime "end_time"
     t.string "teacher_id1"
     t.string "teacher_id2"
   end
