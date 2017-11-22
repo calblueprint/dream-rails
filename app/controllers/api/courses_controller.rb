@@ -13,6 +13,7 @@ class Api::CoursesController < Api::BaseController
 
   def create
     course = Course.new(course_params)
+
     errors = []
     add_teacher("teacher_id1", course, errors)
     add_teacher("teacher_id2", course, errors)
@@ -20,9 +21,14 @@ class Api::CoursesController < Api::BaseController
       return render_error_response(:forbidden, errors)
     end
 
-    update_sessions(course)
     if course.save
-      render json: course
+      # Need to wait until have course_id to create sessions
+      update_sessions(course, errors)
+      if errors.present?
+        return render_error_response(:forbidden, errors)
+      else
+        render json: course
+      end
     else
       render_error_response(:forbidden, course.errors.full_messages)
     end
@@ -33,14 +39,19 @@ class Api::CoursesController < Api::BaseController
     if course.nil?
       return render_error_message(:forbidden, errors: ["Failed to update course."])
     end
+
     errors = []
+    update_sessions(course, errors)
+    if errors.present?
+      return render_error_response(:forbidden, errors)
+    end
+
     update_teacher("teacher_id1", course, errors)
     update_teacher("teacher_id2", course, errors)
     if errors.present?
       return render_error_response(:forbidden, errors)
     end
 
-    update_sessions(course)
     if course.update(course_params)
       render json: course
     else
@@ -58,7 +69,7 @@ class Api::CoursesController < Api::BaseController
   end
 
   def sessions
-    course = Course.find(params[:id])
+    course = Course.find(params[:course_id])
     if !course.nil?
       render json: { sessions: course.sessions.order(:number) }
     else
@@ -68,15 +79,49 @@ class Api::CoursesController < Api::BaseController
 
   private
 
-  def update_sessions(course)
-    if params.key?("sessions") && params[sessions].any?
-      params[sessions].each do |session_id|
-        session = Session.find(session_id)
-        unless course.sessions.include?(session)
-          course.sessions << session
+  def update_sessions(course, errors)
+    # Delete sessions from course not present in params[:sessions]
+    delete_sessions(course, errors)
+
+    # Create/update modified sessions
+    params[:sessions].each do |s|
+      if s[:modified]
+        if s[:id].present?
+          # Update session if it exists
+          session = Session.find(s[:id])
+        else
+          # Create session
+          session = Session.new
+          session.course_id = course.id
+        end
+
+        update_session_attrs(session, s)
+        if !session.save
+          errors << "Session not updated."
         end
       end
     end
+  end
+
+  def delete_sessions(course, errors)
+    # Delete sessions not present in both params[:sessions] and course.sessions
+    course_sessions_ids = course.sessions.ids
+    course_sessions_ids.each do |s_id|
+      found = params[:sessions].find { |session| session[:id] == s_id }
+      if found.nil?
+        session = Session.find(s_id)
+        if !session.destroy
+          errors << "Session not deleted"
+        end
+      end
+    end
+  end
+
+  def update_session_attrs(session, s_params)
+    session.weekday = s_params[:weekday]
+    session.start_time = s_params[:start_time]
+    session.end_time = s_params[:end_time]
+    session.number = s_params[:number]
   end
 
   def add_teacher(t_id, course, errors)
@@ -109,9 +154,6 @@ class Api::CoursesController < Api::BaseController
       :is_active,
       :start_date,
       :end_date,
-      :weekday,
-      :start_time,
-      :end_time,
       :teacher_id1,
       :teacher_id2,
       :teacher_id
