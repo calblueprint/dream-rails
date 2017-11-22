@@ -1,13 +1,11 @@
 class Api::StudentsController < Api::BaseController
-	# TODO: remove
-  skip_before_action :verify_authenticity_token
 
   def index
     if params[:course_id]
       student = Course.find(params[:course_id]).students
       render json: student
     else
-		    render json: Student.all
+		  render json: Student.all
     end
   end
 

@@ -1,6 +1,5 @@
-class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-  protect_from_forgery with: :null_session
+class ApplicationController < ActionController::API
+  respond_to :json
 
   def not_found_response
     error_response(nil, "Not Found", 404)

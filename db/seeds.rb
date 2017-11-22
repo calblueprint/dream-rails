@@ -11,7 +11,7 @@ def make_teachers
     teacher = Teacher.create(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
-      dream_id: Faker::Number.number(7),
+      dream_id: n,
       email: "user#{n}@gmail.com",
       password: "password",
       password_confirmation: "password",
@@ -26,6 +26,8 @@ def make_courses
   1.upto(5) do |n|
     course = Course.create(
       title: Faker::Educator.course,
+      teacher_id1: n,
+      teacher_id2: n+1,
       is_active: Faker::Boolean.boolean,
     )
     course.id = n
