@@ -24,7 +24,7 @@ end
 
 def make_courses
   six_months_ago = Date.yesterday.advance(months: -6)
-  1.upto(15) do |n|
+  1.upto(10) do |n|
     course = Course.create(
       title: Faker::Educator.course,
       teacher_id1: n % 4 + 1,
@@ -49,14 +49,14 @@ def make_sessions
     "Thursday",
     "Friday",
   ]
-  1.upto(30) do |n|
+  1.upto(20) do |n|
     session = Session.create(
       weekday: weekday_list[n%5],
       start_time: Faker::Time.between(2.days.ago, Date.today, :afternoon),
       end_time: Faker::Time.between(2.days.ago, Date.today, :evening),
       number: n % 2,
     )
-    session.course = Course.find(n % 15 + 1)
+    session.course = Course.find(n % 10 + 1)
     session.id = n
     session.save
   end
