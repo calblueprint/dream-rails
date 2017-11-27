@@ -23,15 +23,42 @@ def make_teachers
 end
 
 def make_courses
-  1.upto(5) do |n|
+  six_months_ago = Date.yesterday.advance(months: -6)
+  1.upto(10) do |n|
     course = Course.create(
       title: Faker::Educator.course,
-      teacher_id1: n,
-      teacher_id2: n+1,
+      teacher_id1: n % 4 + 1,
+      teacher_id2: n % 4 + 2,
+      start_date: six_months_ago.advance(months: n),
+      end_date: six_months_ago.advance(months: n + 2),
       is_active: Faker::Boolean.boolean,
     )
+    course.teachers << Teacher.find(course.teacher_id1)
+    course.teachers << Teacher.find(course.teacher_id2)
+
     course.id = n
     course.save
+  end
+end
+
+def make_sessions
+  weekday_list = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+  ]
+  1.upto(20) do |n|
+    session = Session.create(
+      weekday: weekday_list[n%5],
+      start_time: Faker::Time.between(2.days.ago, Date.today, :afternoon),
+      end_time: Faker::Time.between(2.days.ago, Date.today, :evening),
+      number: n % 2,
+    )
+    session.course = Course.find(n % 10 + 1)
+    session.id = n
+    session.save
   end
 end
 
@@ -73,5 +100,6 @@ end
 
 make_teachers
 make_courses
+make_sessions
 make_students
 make_attendances
