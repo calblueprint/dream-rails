@@ -77,6 +77,15 @@ class Api::CoursesController < Api::BaseController
     end
   end
 
+  def teachers
+    course = Course.find(params[:course_id])
+    if !course.nil?
+      render json: { teachers: course.teachers }
+    else
+      render_error_response(:forbidden, ["Could not retrieve course teachers."])
+    end
+  end
+
   private
 
   def update_sessions(course, errors)

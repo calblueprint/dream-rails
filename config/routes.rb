@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :courses, shallow: true do
       resources :students
       get 'sessions', to: 'courses#sessions'
+      get 'teachers', to: 'courses#teachers'
     end
   	resources :teachers
     resources :attendances do
