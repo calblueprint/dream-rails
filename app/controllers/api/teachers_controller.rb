@@ -1,37 +1,42 @@
 class Api::TeachersController < Api::BaseController
 
-    def update
-      @teacher = Teacher.find(params[:id])
+  def update
+    @teacher = Teacher.find(params[:id])
 
-      if @teacher.update(teacher_params)
-        render json: @teacher
-      else
-        error_response(@teacher)
-      end
+    if teacher_params.key?("dream_id")
+      puts "CHANGING DREAM ID"
+    else
+      puts "No dream id"
     end
 
-    def show
-      @teacher = Teacher.find(params[:id])
+    if @teacher.update(teacher_params)
       render json: @teacher
+    else
+      error_response(@teacher)
     end
+  end
 
-    def index
-      @teachers = Teacher.all
-      render json: @teachers
+  def show
+    @teacher = Teacher.find(params[:id])
+    render json: @teacher
+  end
+
+  def index
+    @teachers = Teacher.all
+    render json: @teachers
+  end
+
+  def destroy
+    @teacher = Teacher.find(params[:id])
+    if @teacher.destroy
+      render json: @teacher
+    else
+      error_response(@teacher)
     end
+  end
 
-    def destroy
-      @teacher = Teacher.find(params[:id])
-      if @teacher.destroy
-        render json: @teacher
-      else
-        error_response(@teacher)
-      end
+  private
+    def teacher_params
+      params.require(:teacher).permit(:first_name, :last_name, :dream_id, :email, :phone)
     end
-
-    private
-      def teacher_params
-        params.require(:teacher).permit(:first_name, :last_name, :dream_id, :email, :phone)
-      end
-
   end
