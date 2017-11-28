@@ -4,7 +4,7 @@ class Api::TeachersController < Api::BaseController
     @teacher = Teacher.find(params[:id])
 
     # Cannot update teacher dream_id if teacher already has courses
-    if teacher_params.key?("dream_id") && @teacher.courses.present?
+    if (teacher_params[:dream_id].to_s != @teacher.dream_id) && @teacher.courses.present?
       return render_error_response(:forbidden, ["Cannot change dream ID. Courses are already linked to your account."])
     end
 
