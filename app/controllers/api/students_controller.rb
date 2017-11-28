@@ -50,7 +50,6 @@ class Api::StudentsController < Api::BaseController
         :year,
         :address,
         :course_id,
-        :teacher_id,
         :dream_id,
       )
   	end
