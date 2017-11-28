@@ -11,7 +11,11 @@ Rails.application.routes.draw do
       get 'sessions', to: 'courses#sessions'
       get 'teachers', to: 'courses#teachers'
     end
-  	resources :teachers
+
+  	resources :teachers do
+      get 'courses', to: 'teachers#courses'
+    end
+
     resources :attendances do
       collection do
         post :attendance_item
