@@ -15,7 +15,7 @@ def make_teachers
       email: "user#{n}@gmail.com",
       password: "password",
       password_confirmation: "password",
-      phone: Faker::PhoneNumber.phone_number,
+      phone: Faker::PhoneNumber.cell_phone.gsub(/-/, ''),
     )
     teacher.id = n
     teacher.save
