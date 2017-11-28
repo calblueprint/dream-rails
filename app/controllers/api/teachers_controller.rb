@@ -34,7 +34,17 @@ class Api::TeachersController < Api::BaseController
     end
   end
 
+  def courses
+    teacher = Teacher.find(params[:teacher_id])
+    if !teacher.nil?
+      render json: teacher.courses.order(:id)
+    else
+      render_error_response(:forbidden, ["Could not retrieve courses."])
+    end
+  end
+
   private
+
     def teacher_params
       params.require(:teacher).permit(:first_name, :last_name, :dream_id, :email, :phone)
     end

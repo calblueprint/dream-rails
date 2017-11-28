@@ -1,10 +1,7 @@
 class Api::CoursesController < Api::BaseController
 
   def index
-    if params[:teacher_id]
-      render json: Course.where(teacher_id1: params[:teacher_id]).or(
-                   Course.where(teacher_id2: params[:teacher_id]))
-    end
+    render json: Course.order(:id).all
   end
 
   def show
