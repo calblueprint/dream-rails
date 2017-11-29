@@ -84,7 +84,7 @@ def make_attendances
   1.upto(25) do |n|
     1.upto(5) do |m|
       attendance = Attendance.create(
-        date: Faker::Date.between(15.years.ago, 2.years.ago),
+        date: Faker::Date.between(15.years.ago, 2.years.ago).to_formatted_s(:db),
         attendance_type: Faker::Number.between(0, 4),
         comment: Faker::Lorem.word,
         is_synced: Faker::Boolean.boolean,
