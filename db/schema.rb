@@ -56,17 +56,17 @@ ActiveRecord::Schema.define(version: 20171129040159) do
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.string "birthday"
     t.string "address"
     t.integer "year"
     t.string "nickname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "emergency_name"
-    t.string "phone"
-    t.string "emergency_phone"
+    t.string "primary_contact"
+    t.string "primary_contact_relationship"
+    t.string "primary_contact_phone"
+    t.string "primary_contact_phone2"
     t.integer "course_id"
-    t.integer "teacher_id"
-    t.date "birthday"
     t.string "dream_id"
   end
 
