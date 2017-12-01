@@ -49,15 +49,15 @@ def make_sessions
     "Thursday",
     "Friday",
   ]
-  1.upto(20) do |n|
+  1.upto(10) do |n|
     session = Session.create(
       weekday: weekday_list[n%5],
       start_time: Faker::Time.between(2.days.ago, Date.today, :afternoon),
       end_time: Faker::Time.between(2.days.ago, Date.today, :evening),
-      number: n % 2,
+      number: 0,
     )
-    session.course = Course.find(n % 10 + 1)
-    session.id = n
+    session.course = Course.find(n)
+    # session.id = n
     session.save
   end
 end
