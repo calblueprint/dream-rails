@@ -57,7 +57,6 @@ def make_sessions
       number: 0,
     )
     session.course = Course.find(n)
-    # session.id = n
     session.save
   end
 end

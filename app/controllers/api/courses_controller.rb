@@ -88,31 +88,20 @@ class Api::CoursesController < Api::BaseController
   def update_sessions(course, errors)
     # Delete sessions from course not present in params[:sessions]
     delete_sessions(course, errors)
-    puts "DELETED SESSION"
-    puts "PARAMS SESSIONS"
-    puts params[:sessions]
 
     # Create/update modified sessions
     params[:sessions].each do |s|
       if s[:modified]
-        puts "CURRENT MODIFIED SESSION"
-        puts s.inspect
-        puts "SESSION ID"
-        puts s[:id]
         if s[:id].present?
-          puts "SESSION EXISTS"
           # Update session if it exists
           session = Session.find(s[:id])
         else
-          puts "NEW SESSION"
           # Create session
           session = Session.new
           session.course_id = course.id
         end
 
         update_session_attrs(session, s)
-        puts "UPDATED SESSION"
-        puts session.inspect
         if !session.save
           errors << "Session not updated."
         end
