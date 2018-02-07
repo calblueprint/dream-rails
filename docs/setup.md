@@ -19,6 +19,10 @@ Install [React Native](https://facebook.github.io/react-native/docs/getting-star
 
 6. Install Watchman `brew install watchman`
 
-7. cd into dream-rails and run `rails s` to start the server
+Probably Aivant and Wilson: If you don't have postgres/postgresql (they are the same thing) installed: 
+- Install postgresql `brew install postgres`
+- `brew services start postgresql`
 
-8. On another terminal window, cd into dream-mobile and run `npm install` to install all the gems. Then, run `npm start` to start the application.
+8. cd into dream-rails and run `rails s` to start the server
+
+9. On another terminal window, cd into dream-mobile and run `npm install` to install all the gems. Then, run `npm start` to start the application.
