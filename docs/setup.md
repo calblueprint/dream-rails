@@ -1,4 +1,4 @@
-Rails Setup Instructions
+Setup Instructions
 -------
 Install [Rails](http://installrails.com/) 
 
