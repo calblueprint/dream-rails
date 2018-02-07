@@ -22,6 +22,7 @@ Install [React Native](https://facebook.github.io/react-native/docs/getting-star
 Probably Aivant and Wilson: If you don't have postgres/postgresql (they are the same thing) installed: 
 - Install postgresql `brew install postgres`
 - `brew services start postgresql`
+- More info: https://medium.com/@bitadj/completely-uninstall-and-reinstall-psql-on-osx-551390904b86
 
 8. cd into dream-rails and run `rails s` to start the server
 
