@@ -19,6 +19,6 @@ Install [React Native](https://facebook.github.io/react-native/docs/getting-star
 
 6. Install Watchman `brew install watchman`
 
-7. Run `rails s` to start the server
+7. cd into dream-rails and run `rails s` to start the server
 
-8. On another terminal window, run `npm start` to start the application
+8. On another terminal window, cd into dream-mobile and run `npm install` to install all the gems. Then, run `npm start` to start the application.
