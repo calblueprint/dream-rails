@@ -13,7 +13,6 @@
 #  emergency_name  :string
 #  phone           :string
 #  emergency_phone :string
-#  course_id       :integer
 #  teacher_id      :integer
 #  birthday        :date
 #
