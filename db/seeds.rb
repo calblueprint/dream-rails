@@ -41,10 +41,10 @@ def make_courses
   end
 end
 
-def make_course_students
+def make_courses_students
   1.upto(10) do |n|
     1.upto(5) do |m|
-      CourseStudent.create(
+      CourseStudents.create(
         student_id: (n-1) * 5 + m
         course_id: n
       )
@@ -94,4 +94,4 @@ make_teachers
 make_courses
 make_sessions
 make_students
-make_course_students
+make_courses_students
