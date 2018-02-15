@@ -41,6 +41,17 @@ def make_courses
   end
 end
 
+def make_course_students
+  1.upto(10) do |n|
+    1.upto(5) do |m|
+      CourseStudent.create(
+        student_id: (n-1) * 5 + m
+        course_id: n
+      )
+    end
+  end
+end
+
 def make_sessions
   weekday_list = [
     "Monday",
@@ -70,7 +81,6 @@ def make_students
         birthday: Faker::Date.birthday(3, 18),
         year: Faker::Number.between(0, 12),
         address: Faker::Address.street_address,
-        course_id: n,
         dream_id: (n-1) * 5 + m
       )
       student.id = (n-1) * 5 + m
@@ -79,7 +89,9 @@ def make_students
   end
 end
 
+
 make_teachers
 make_courses
 make_sessions
 make_students
+make_course_students
