@@ -19,8 +19,8 @@
 #
 
 class Student < ApplicationRecord
-	has_many :course_students
-	has_many :courses, :through => :course_students
+	has_many :courses_students
+	has_many :courses, :through => :courses_students
   has_many :attendances
   validates :first_name, :last_name, :birthday, :year, :address, presence: true
 end
