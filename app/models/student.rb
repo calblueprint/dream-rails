@@ -19,7 +19,7 @@
 #
 
 class Student < ApplicationRecord
-  belongs_to :course
+  #belongs_to :course
   has_many :attendances
   validates :first_name, :last_name, :birthday, :year, :address, presence: true
 end
