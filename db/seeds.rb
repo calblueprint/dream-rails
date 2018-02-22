@@ -20,6 +20,18 @@ def make_teachers
     teacher.id = n
     teacher.save
   end
+  admin = Teacher.create(
+    admin: true,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    dream_id: 6,
+    email: "admin@gmail.com",
+    password: "password",
+    password_confirmation: "password",
+    phone: Faker::PhoneNumber.cell_phone.gsub(/-/, '')
+  )
+  admin.id = 6
+  admin.save
 end
 
 def make_courses
