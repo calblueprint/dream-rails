@@ -24,3 +24,5 @@ config/secret.yml
 /log/*
 !/log/.keep
 /tmp
+
+erd.pdf
