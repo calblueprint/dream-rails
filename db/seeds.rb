@@ -28,14 +28,16 @@ def make_teachers
     email: "admin@gmail.com",
     password: "password",
     password_confirmation: "password",
-    phone: Faker::PhoneNumber.cell_phone.gsub(/-/, '')
+    phone: Faker::PhoneNumber.cell_phone.gsub(/-/, ''),
   )
   admin.id = 6
   admin.save
 end
 
 def make_courses
+  programs = ["Montessori", "A Ganar", "DPV", "Young Stars", "Summer Camp", "Mobile Library"]
   six_months_ago = Date.yesterday.advance(months: -6)
+  i = 0
   1.upto(10) do |n|
     course = Course.create(
       title: Faker::Educator.course,
@@ -44,12 +46,25 @@ def make_courses
       start_date: six_months_ago.advance(months: n),
       end_date: six_months_ago.advance(months: n + 2),
       is_active: Faker::Boolean.boolean,
-    )
-    course.teachers << Teacher.find(course.teacher_id1)
-    course.teachers << Teacher.find(course.teacher_id2)
+      program: programs[i]
+    )    
+    i += 1
+    if i == 6
+      i = 0
+    end
+    teacher1 = Teacher.find(course.teacher_id1)
+    teacher2 = Teacher.find(course.teacher_id2)
+    course.teachers << teacher1
+    course.teachers << teacher2
+    teacher1.program = course.program
+    teacher2.program = course.program
+    teacher1.save
+    teacher2.save
 
     course.id = n
     course.save
+
+
   end
 end
 
