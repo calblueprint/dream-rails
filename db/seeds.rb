@@ -60,11 +60,8 @@ def make_courses
     teacher2.program = course.program
     teacher1.save
     teacher2.save
-
     course.id = n
     course.save
-
-
   end
 end
 
