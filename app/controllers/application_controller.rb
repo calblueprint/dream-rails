@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include CanCan::ControllerAdditions
   respond_to :json
 
   def not_found_response
@@ -23,6 +24,6 @@ class ApplicationController < ActionController::API
   end
 
   def current_ability
-    @current_ability ||= Ability.new(current_user)
+    @current_ability ||= ::Abilities::Ability.new(current_user)
   end
 end
