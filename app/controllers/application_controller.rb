@@ -16,4 +16,13 @@ class ApplicationController < ActionController::API
   def render_error_response(status, errors)
     render json: { errors: errors }, status: status
   end
+
+  # CanCanCan
+  def current_user
+    current_teacher
+  end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user)
+  end
 end

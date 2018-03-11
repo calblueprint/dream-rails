@@ -17,6 +17,9 @@ class Teacher < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_and_belongs_to_many :courses
+
+  has_many :courses_teachers
+  has_many :courses, through: :courses_teachers
+
 	validates :first_name, :last_name, :dream_id, :email, :phone, presence: true
 end

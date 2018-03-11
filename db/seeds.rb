@@ -5,6 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+$teachers = []
+$courses = []
 
 def make_teachers
   1.upto(5) do |n|
@@ -17,8 +19,7 @@ def make_teachers
       password_confirmation: "password",
       phone: Faker::PhoneNumber.cell_phone.gsub(/-/, ''),
     )
-    teacher.id = n
-    teacher.save
+    $teachers << teacher
   end
 end
 
@@ -27,17 +28,26 @@ def make_courses
   1.upto(10) do |n|
     course = Course.create(
       title: Faker::Educator.course,
-      teacher_id1: n % 4 + 1,
-      teacher_id2: n % 4 + 2,
+      teacher_id1: n % ($teachers.length - 1) + 1,
+      teacher_id2: n % ($teachers.length - 1) + 2,
       start_date: six_months_ago.advance(months: n),
       end_date: six_months_ago.advance(months: n + 2),
       is_active: Faker::Boolean.boolean,
     )
-    course.teachers << Teacher.find(course.teacher_id1)
-    course.teachers << Teacher.find(course.teacher_id2)
+    $courses << course
+  end
+end
 
-    course.id = n
-    course.save
+def make_teacher_courses
+  $courses.each do |course|
+    CoursesTeacher.create(
+      course_id: course.id,
+      teacher_id: course.id % ($teachers.length - 1) + 1,
+    )
+    CoursesTeacher.create(
+      course_id: course.id,
+      teacher_id: course.id % ($teachers.length - 1) + 2, 
+    )
   end
 end
 
@@ -81,5 +91,6 @@ end
 
 make_teachers
 make_courses
+make_teacher_courses
 make_sessions
 make_students
