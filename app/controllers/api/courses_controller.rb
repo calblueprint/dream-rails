@@ -1,4 +1,6 @@
 class Api::CoursesController < Api::BaseController
+  # TODO: Uncomment when auth_token is ready
+  # load_and_authorize_resource
 
   def index
     render json: Course.order(:id).all
