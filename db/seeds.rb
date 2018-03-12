@@ -83,8 +83,6 @@ def make_students
         course_id: n,
         dream_id: (n-1) * 5 + m
       )
-      student.id = (n-1) * 5 + m
-      student.save
     end
   end
 end
