@@ -68,9 +68,25 @@ def make_students
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         birthday: Faker::Date.birthday(3, 18),
-        year: Faker::Number.between(0, 12),
         address: Faker::Address.street_address,
-        dream_id: (n-1) * 5 + m
+        year: Faker::Number.between(0, 12),
+        nickname: Faker::LordOfTheRings.character,
+        created_at: Faker::Date.between(1000.days.ago, 50.days.ago),
+        updated_at: Faker::Date.between(49.days.ago, Date.today),
+        primary_contact: Faker::Name.name,
+        primary_contact_phone: Faker::PhoneNumber.phone_number,
+        dream_id: (n-1) * 5 + m,
+        is_active: [true, false].sample,
+        sex: [0, 1].sample,
+        facebook_name: Faker::Name.name,
+        notes: Faker::TheFreshPrinceOfBelAir.quote,
+        document_type: [0, 1, 2, 3, 4, 5].sample,
+        level: [0, 1, 2, 3, 4].sample,
+        phone: Faker::PhoneNumber.phone_number,
+        phone2: Faker::PhoneNumber.phone_number,
+        email: Faker::Internet.email,
+        primary_language: [0, 1, 2].sample,
+        past_dream_participant: [true, false].sample
       )
       student.id = (n-1) * 5 + m
       student.save
