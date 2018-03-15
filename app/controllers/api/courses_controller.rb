@@ -156,13 +156,16 @@ class Api::CoursesController < Api::BaseController
 
   def course_params
     params.require(:course).permit(
-      :title,
+      :course_name,
       :is_active,
       :start_date,
       :end_date,
       :teacher_id1,
       :teacher_id2,
-      :teacher_id
+      :course_nickname,
+      :site,
+      :program,
+      :notes
     )
   end
 end
