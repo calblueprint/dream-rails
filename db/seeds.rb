@@ -87,7 +87,7 @@ def make_students
         document_type: [0, 1, 2, 3, 4, 5].sample,
         level: [0, 1, 2, 3, 4].sample,
         phone: Faker::PhoneNumber.phone_number,
-        phone2: Faker::PhoneNumber.phone_number,
+        phone_2: Faker::PhoneNumber.phone_number,
         email: Faker::Internet.email,
         primary_language: [0, 1, 2].sample,
         past_dream_participant: [true, false].sample
