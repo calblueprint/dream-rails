@@ -32,6 +32,10 @@ def make_courses
       start_date: six_months_ago.advance(months: n),
       end_date: six_months_ago.advance(months: n + 2),
       is_active: Faker::Boolean.boolean,
+      course_nickname: Faker::Educator.course,
+      site: Faker::Educator.campus,
+      program: Faker::Educator.university,
+      notes: Faker::HarryPotter.quote
     )
     course.teachers << Teacher.find(course.teacher_id1)
     course.teachers << Teacher.find(course.teacher_id2)
