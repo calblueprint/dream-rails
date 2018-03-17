@@ -102,7 +102,7 @@ def make_courses_students
   1.upto(10) do |n|
     1.upto(5) do |m|
       course_student = CoursesStudent.create(
-        student_id: (n-1) * 5 + m,
+        student_id: 1,
         course_id: n
       )
     end

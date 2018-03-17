@@ -4,50 +4,51 @@ class Api::CoursesStudentsController < ApplicationController
   # GET /api/courses_students
   # GET /api/courses_students.json
   def index
-    @api_courses_students = Api::CoursesStudent.all
   end
 
   # GET /api/courses_students/1
   # GET /api/courses_students/1.json
+  # Renders all enrolled students associated with a given course id.
   def show
+    courses_students = CoursesStudent.where(:course_id => params[:course_id]).to_a
+    students = Array.new
+    for courses_students.each do |e| 
+      students.push(Student.find(e.student_id))
+    end
+    render json: students
   end
 
   # POST /api/courses_students
   # POST /api/courses_students.json
   def create
-    @api_courses_student = Api::CoursesStudent.new(api_courses_student_params)
-
-    if @api_courses_student.save
-      render :show, status: :created, location: @api_courses_student
+    courses_student = CoursesStudent.new(courses_student_params)
+    if courses_student.save
+      render json: courses_student
     else
-      render json: @api_courses_student.errors, status: :unprocessable_entity
+      error_response(courses_student)
     end
   end
 
   # PATCH/PUT /api/courses_students/1
   # PATCH/PUT /api/courses_students/1.json
   def update
-    if @api_courses_student.update(api_courses_student_params)
-      render :show, status: :ok, location: @api_courses_student
-    else
-      render json: @api_courses_student.errors, status: :unprocessable_entity
-    end
   end
 
   # DELETE /api/courses_students/1
   # DELETE /api/courses_students/1.json
   def destroy
-    @api_courses_student.destroy
+    courses_student = CoursesStudent.find(params[:id])
+    if courses_student.destroy
+      render json: courses_student
+    else
+      render_error_response(:forbidden, courses_student.errors.full_messages)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_courses_student
-      @api_courses_student = Api::CoursesStudent.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def api_courses_student_params
-      params.fetch(:api_courses_student, {})
+    def courses_student_params
+      params.require(:courses_student).permit(
+        :student_id,
+        :course_id
+      )
     end
 end

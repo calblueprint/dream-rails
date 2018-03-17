@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       get 'teachers', to: 'courses#teachers'
     end
 
-    resources :teachers do
+  	resources :teachers do
       get 'courses', to: 'teachers#courses'
     end
 
