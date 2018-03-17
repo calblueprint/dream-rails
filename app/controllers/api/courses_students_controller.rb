@@ -1,5 +1,4 @@
 class Api::CoursesStudentsController < ApplicationController
-  before_action :set_api_courses_student, only: [:show, :update, :destroy]
 
   # GET /api/courses_students
   # GET /api/courses_students.json
@@ -12,7 +11,7 @@ class Api::CoursesStudentsController < ApplicationController
   def show
     courses_students = CoursesStudent.where(:course_id => params[:course_id]).to_a
     students = Array.new
-    for courses_students.each do |e| 
+    for e in courses_students
       students.push(Student.find(e.student_id))
     end
     render json: students
@@ -42,13 +41,13 @@ class Api::CoursesStudentsController < ApplicationController
       render json: courses_student
     else
       render_error_response(:forbidden, courses_student.errors.full_messages)
+    end
   end
 
-  private
-    def courses_student_params
-      params.require(:courses_student).permit(
-        :student_id,
-        :course_id
-      )
-    end
+  def courses_student_params
+    params.require(:courses_student).permit(
+      :student_id,
+      :course_id
+    )
+  end
 end

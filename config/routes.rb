@@ -21,5 +21,8 @@ Rails.application.routes.draw do
         post :attendance_item
       end
     end
+
+    resources :courses_students do 
+    end
   end
 end
