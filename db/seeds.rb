@@ -26,12 +26,16 @@ def make_courses
   six_months_ago = Date.yesterday.advance(months: -6)
   1.upto(10) do |n|
     course = Course.create(
-      title: Faker::Educator.course,
+      course_name: Faker::Educator.course,
       teacher_id1: n % 4 + 1,
       teacher_id2: n % 4 + 2,
       start_date: six_months_ago.advance(months: n),
       end_date: six_months_ago.advance(months: n + 2),
       is_active: Faker::Boolean.boolean,
+      course_nickname: Faker::Educator.course,
+      site: Faker::Educator.campus,
+      program: Faker::Educator.university,
+      notes: Faker::HarryPotter.quote
     )
     course.teachers << Teacher.find(course.teacher_id1)
     course.teachers << Teacher.find(course.teacher_id2)
@@ -68,13 +72,39 @@ def make_students
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         birthday: Faker::Date.birthday(3, 18),
-        year: Faker::Number.between(0, 12),
         address: Faker::Address.street_address,
-        course_id: n,
-        dream_id: (n-1) * 5 + m
+        year: Faker::Number.between(0, 12),
+        nickname: Faker::LordOfTheRings.character,
+        created_at: Faker::Date.between(1000.days.ago, 50.days.ago),
+        updated_at: Faker::Date.between(49.days.ago, Date.today),
+        primary_contact: Faker::Name.name,
+        primary_contact_phone: Faker::PhoneNumber.phone_number,
+        dream_id: (n-1) * 5 + m,
+        is_active: [true, false].sample,
+        sex: [0, 1].sample,
+        facebook_name: Faker::Name.name,
+        notes: Faker::TheFreshPrinceOfBelAir.quote,
+        document_type: [0, 1, 2, 3, 4, 5].sample,
+        level: [0, 1, 2, 3, 4].sample,
+        phone: Faker::PhoneNumber.phone_number,
+        phone_2: Faker::PhoneNumber.phone_number,
+        email: Faker::Internet.email,
+        primary_language: [0, 1, 2].sample,
+        past_dream_participant: [true, false].sample
       )
       student.id = (n-1) * 5 + m
       student.save
+    end
+  end
+end
+
+def make_courses_students
+  1.upto(10) do |n|
+    1.upto(5) do |m|
+      course_student = CoursesStudent.create(
+        student_id: (n-1) * 5 + m,
+        course_id: n
+      )
     end
   end
 end
@@ -83,3 +113,4 @@ make_teachers
 make_courses
 make_sessions
 make_students
+make_courses_students

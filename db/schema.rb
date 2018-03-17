@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129040159) do
+ActiveRecord::Schema.define(version: 20180315034443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20171129040159) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string "title"
+    t.string "course_name"
     t.boolean "is_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 20171129040159) do
     t.datetime "end_date"
     t.string "teacher_id1"
     t.string "teacher_id2"
+    t.string "course_nickname"
+    t.string "site"
+    t.integer "program"
+    t.string "notes"
+  end
+
+  create_table "courses_students", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "courses_teachers", id: false, force: :cascade do |t|
@@ -63,11 +74,19 @@ ActiveRecord::Schema.define(version: 20171129040159) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "primary_contact"
-    t.string "primary_contact_relationship"
     t.string "primary_contact_phone"
-    t.string "primary_contact_phone2"
-    t.integer "course_id"
     t.string "dream_id"
+    t.boolean "is_active"
+    t.integer "sex"
+    t.string "facebook_name"
+    t.string "notes"
+    t.integer "document_type"
+    t.integer "level"
+    t.string "phone"
+    t.string "phone_2"
+    t.string "email"
+    t.integer "primary_language", default: 0
+    t.boolean "past_dream_participant", default: false
   end
 
   create_table "teachers", force: :cascade do |t|
