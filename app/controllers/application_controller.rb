@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include CanCan::ControllerAdditions
   respond_to :json
 
   def not_found_response
@@ -15,5 +16,14 @@ class ApplicationController < ActionController::API
 
   def render_error_response(status, errors)
     render json: { errors: errors }, status: status
+  end
+
+  # CanCanCan
+  def current_user
+    current_teacher
+  end
+
+  def current_ability
+    @current_ability ||= ::Abilities::Ability.new(current_user)
   end
 end
