@@ -11,6 +11,7 @@ $courses = []
 def make_teachers
   1.upto(5) do |n|
     teacher = Teacher.create(
+      admin: false,
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       dream_id: n,
@@ -21,6 +22,18 @@ def make_teachers
     )
     $teachers << teacher
   end
+  admin = Teacher.create(
+    admin: true,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    dream_id: 6,
+    email: "admin@gmail.com",
+    password: "password",
+    password_confirmation: "password",
+    phone: Faker::PhoneNumber.cell_phone.gsub(/-/, ''),
+  )
+  admin.id = 6
+  admin.save
 end
 
 def make_courses

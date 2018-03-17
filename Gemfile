@@ -42,7 +42,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'devise'
 
-gem 'rails-erd', require: false, group: :development
+# gem 'rails-erd', require: false, group: :development
 
 gem 'cancancan', '~> 2.0'
 
