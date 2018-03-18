@@ -1,5 +1,8 @@
 class Api::CoursesStudentsController < ApplicationController
+<<<<<<< HEAD
   # before_action :set_api_courses_student, only: [:show, :update, :destroy]
+=======
+>>>>>>> ed70a078fbc8444d16ac6ef8d37d266c67afcf6c
 
   # GET /api/courses_students
   # GET /api/courses_students.json
@@ -21,6 +24,12 @@ class Api::CoursesStudentsController < ApplicationController
     #   students.push(Student.find(e.student_id))
     # end
     # render json: students
+    courses_students = CoursesStudent.where(:course_id => params[:course_id]).to_a
+    students = Array.new
+    for e in courses_students
+      students.push(Student.find(e.student_id))
+    end
+    render json: students
   end
 
   # def students
