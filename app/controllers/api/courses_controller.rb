@@ -109,6 +109,21 @@ class Api::CoursesController < Api::BaseController
     end
   end
 
+  def students
+    course = Course.find(params[:course_id])
+    if !course.nil?
+      courses_students = CoursesStudent.find(:course_id => params[:course_id]).to_a
+      students = Array.new
+      courses_students.each do |e| 
+        students.push(Student.find(e.student_id))
+      end
+      render json: students
+      # render json: course.students.order(:id)
+    else
+      render_error_response(:forbidden, ["Could not retrieve courses."])
+    end
+  end
+
   def delete_sessions(course, errors)
     # Delete sessions not present in both params[:sessions] and course.sessions
     course_sessions_ids = course.sessions.ids

@@ -26,7 +26,7 @@ def make_courses
   six_months_ago = Date.yesterday.advance(months: -6)
   1.upto(10) do |n|
     course = Course.create(
-      course_name: Faker::Educator.course,
+      title: Faker::Educator.course,
       teacher_id1: n % 4 + 1,
       teacher_id2: n % 4 + 2,
       start_date: six_months_ago.advance(months: n),
