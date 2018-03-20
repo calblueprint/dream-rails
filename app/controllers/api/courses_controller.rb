@@ -86,12 +86,7 @@ class Api::CoursesController < Api::BaseController
   def students
     course = Course.find(params[:course_id])
     if !course.nil?
-      courses_students = CoursesStudent.find(:course_id => params[:course_id]).to_a
-      students = Array.new
-      courses_students.each do |e| 
-        students.push(Student.find(e.student_id))
-      end
-      render json: students
+      render json: course.students.order(:id)
     else
       render_error_response(:forbidden, ["Could not retrieve students."])
     end
@@ -167,6 +162,8 @@ class Api::CoursesController < Api::BaseController
       add_teacher(t_id, course, errors)
     end
   end
+
+  #add student method
 
   def course_params
     params.require(:course).permit(
