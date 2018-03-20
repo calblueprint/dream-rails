@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :courses_students do
+    resources :students do
     end
     
   end
