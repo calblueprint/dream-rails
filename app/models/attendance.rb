@@ -14,6 +14,7 @@
 #
 
 class Attendance < ApplicationRecord
+	enum program: {'Present': 0, 'Unexcused Absent': 1, 'Excused Absent': 2, 'Unexcused Late': 3, 'Excused Late': 4}
   belongs_to :course
   belongs_to :student
 end
