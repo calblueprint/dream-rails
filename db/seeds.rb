@@ -72,7 +72,6 @@ def make_students
       last_name: Faker::Name.last_name,
       birthday: Faker::Date.birthday(3, 18),
       address: Faker::Address.street_address,
-      year: Faker::Number.between(0, 12),
       nickname: Faker::LordOfTheRings.character,
       created_at: Faker::Date.between(1000.days.ago, 50.days.ago),
       updated_at: Faker::Date.between(49.days.ago, Date.today),
