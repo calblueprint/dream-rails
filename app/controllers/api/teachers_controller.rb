@@ -1,4 +1,6 @@
 class Api::TeachersController < Api::BaseController
+  # TODO: Uncomment when auth_token is ready
+  # load_and_authorize_resource
 
   def update
     @teacher = Teacher.find(params[:id])
