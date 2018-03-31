@@ -102,15 +102,15 @@ def make_students
       primary_contact_phone: Faker::PhoneNumber.phone_number,
       dream_id: m,
       is_active: [true, false].sample,
-      sex: [0, 1].sample,
+      sex: rand(0..1),
       facebook_name: Faker::Name.name,
       notes: Faker::TheFreshPrinceOfBelAir.quote,
-      document_type: [0, 1, 2, 3, 4, 5].sample,
-      level: [0, 1, 2, 3, 4].sample,
+      document_type: rand(0..5),
+      level: rand(0..4),
       phone: Faker::PhoneNumber.phone_number,
       phone_2: Faker::PhoneNumber.phone_number,
       email: Faker::Internet.email,
-      primary_language: [0, 1, 2].sample,
+      primary_language: rand(0..2),
       past_dream_participant: [true, false].sample
     )
     student.id = m
