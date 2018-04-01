@@ -80,6 +80,9 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (0.1.43)
+      devise (> 3.5.2, < 4.5)
+      rails (< 6)
     erubi (1.7.0)
     execjs (2.7.0)
     faker (1.8.4)
@@ -214,6 +217,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   devise
+  devise_token_auth
   faker
   figaro
   jbuilder (~> 2.5)
