@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :teachers, skip: [:registrations, :passwords]
+  mount_devise_token_auth_for 'Teacher', at: 'auth'
+  devise_for :teachers, skip: [:registrations, :passwords, :sessions]
 
   devise_scope :teacher do
     post '/sign_up' => 'registrations#create'

@@ -44,6 +44,8 @@ gem 'devise'
 
 gem 'devise_token_auth'
 
+gem 'omniauth'
+
 # gem 'rails-erd', require: false, group: :development
 
 gem 'cancancan', '~> 2.0'
