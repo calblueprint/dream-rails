@@ -47,10 +47,23 @@ class Api::StudentsController < Api::BaseController
         :first_name,
         :last_name,
         :birthday,
-        :year,
+        # :year,
         :address,
-        :course_id,
         :dream_id,
+        :nickname,
+        :primary_contact,
+        :primary_contact_phone,
+        :is_active,
+        :sex,
+        :facebook_name,
+        :notes,
+        :document_type,
+        :level,
+        :phone,
+        :phone_2,
+        :email,
+        :primary_language,
+        :past_dream_participant
       )
   	end
 end
