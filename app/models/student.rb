@@ -1,4 +1,4 @@
-a# == Schema Information
+# == Schema Information
 #
 # Table name: students
 #
