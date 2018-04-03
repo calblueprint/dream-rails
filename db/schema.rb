@@ -67,25 +67,25 @@ ActiveRecord::Schema.define(version: 20180323184235) do
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "birthday" #should be stored as date object
+    t.string "birthday"
     t.string "address"
     t.string "nickname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "primary_contact"
     t.string "primary_contact_phone"
-    t.string "dream_id" #participant register
+    t.string "dream_id"
     t.boolean "is_active"
     t.integer "sex"
     t.string "facebook_name"
     t.string "notes"
     t.integer "document_type"
-    t.integer "level" 
+    t.integer "level"
     t.string "phone"
     t.string "phone_2"
     t.string "email"
-    t.integer "primary_language", default: 0 #should not have a default
-    t.boolean "past_dream_participant", default: false #should not have a default
+    t.integer "primary_language", default: 0
+    t.boolean "past_dream_participant", default: false
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20180323184235) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
