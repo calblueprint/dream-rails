@@ -85,6 +85,15 @@ class Api::CoursesController < Api::BaseController
     end
   end
 
+  def students
+    course = Course.find(params[:course_id])
+    if !course.nil?
+      render json: course.students.order(:id)
+    else
+      render_error_response(:forbidden, ["Could not retrieve students."])
+    end
+  end
+
   private
 
   def update_sessions(course, errors)
@@ -98,7 +107,7 @@ class Api::CoursesController < Api::BaseController
           # Update session if it exists
           session = Session.find(s[:id])
         else
-          # Create session
+          # Create sessioni
           session = Session.new
           session.course_id = course.id
         end
@@ -156,6 +165,8 @@ class Api::CoursesController < Api::BaseController
     end
   end
 
+  #add student method
+
   def course_params
     params.require(:course).permit(
       :title,
@@ -164,7 +175,10 @@ class Api::CoursesController < Api::BaseController
       :end_date,
       :teacher_id1,
       :teacher_id2,
-      :teacher_id
+      :course_nickname,
+      :site,
+      :program,
+      :notes
     )
   end
 end

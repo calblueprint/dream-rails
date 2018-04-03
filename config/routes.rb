@@ -7,12 +7,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :courses, shallow: true do
-      resources :students
       get 'sessions', to: 'courses#sessions'
       get 'teachers', to: 'courses#teachers'
+      get 'students', to: 'courses#students'
     end
 
-    resources :teachers do
+  	resources :teachers do
       get 'courses', to: 'teachers#courses'
     end
 
@@ -21,5 +21,9 @@ Rails.application.routes.draw do
         post :attendance_item
       end
     end
+
+    resources :students do
+    end
+    
   end
 end
