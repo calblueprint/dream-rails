@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     end
 
     resources :students do
+      collection do
+        get 'search', to: 'students#search'
+      end
     end
     
   end
