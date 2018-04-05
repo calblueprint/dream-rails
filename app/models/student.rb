@@ -25,5 +25,7 @@ class Student < ApplicationRecord
 	enum primary_language: {'Spanish': 0, 'Creole': 1, 'Other': 2}
   has_many :courses_students
   has_many :courses, :through => :courses_students
-  validates :first_name, :last_name, :birthday, :address, presence: true
+  validates :is_active, :first_name, :last_name, :birthday, :sex, 
+  :address, :document_type, :phone, :facebook_name, :email, 
+  :primary_contact, :primary_contact_phone, presence: true
 end
