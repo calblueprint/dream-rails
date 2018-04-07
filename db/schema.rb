@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405050651) do
+ActiveRecord::Schema.define(version: 20180407043757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 20180405050651) do
     t.string "phone"
     t.string "phone_2"
     t.string "email"
-    t.integer "primary_language", default: 0
-    t.boolean "past_dream_participant", default: false
+    t.integer "primary_language"
+    t.boolean "past_dream_participant"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 20180405050651) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
