@@ -27,6 +27,9 @@ Rails.application.routes.draw do
         get 'search', to: 'students#search'
       end
     end
+
+    resources :courses_students do
+    end
     
   end
 end
