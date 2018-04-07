@@ -24,7 +24,7 @@ class Student < ApplicationRecord
 	enum level: {'Maternal': 0, 'Kinder': 1, 'Pre-Primaria': 2, 'Primero': 3, 'Segundo': 4}
 	enum primary_language: {'Spanish': 0, 'Creole': 1, 'Other': 2}
   has_many :courses_students
-  has_many :courses, :through => :courses_students\
+  has_many :courses, :through => :courses_students
 	has_many :attendances, :through => :courses_students
   validates :first_name, :last_name, :birthday, 
   :address, :phone, :facebook_name, :email, 
