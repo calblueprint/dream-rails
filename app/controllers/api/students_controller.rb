@@ -62,7 +62,7 @@ class Api::StudentsController < Api::BaseController
         :phone_2,
         :email,
         :primary_language,
-        :past_dream_participant
+        :past_dream_participant,
       )
   	end
 end
