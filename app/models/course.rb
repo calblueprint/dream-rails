@@ -12,6 +12,7 @@
 class Course < ApplicationRecord
   has_many :courses_students
   has_many :students, :through => :courses_students
+  has_many :attendances, :through => :courses_students
   has_and_belongs_to_many :teachers
   has_many :sessions, :dependent => :destroy
 end

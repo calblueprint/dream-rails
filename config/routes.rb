@@ -30,6 +30,9 @@ Rails.application.routes.draw do
 
     resources :courses_students do
     end
+
+    resources :courses_students do
+    end
     
   end
 end

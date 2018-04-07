@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323184235) do
+ActiveRecord::Schema.define(version: 20180407043757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20180323184235) do
     t.boolean "is_synced", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "courses_student_id"
+    t.index ["courses_student_id"], name: "index_attendances_on_courses_student_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -84,8 +86,8 @@ ActiveRecord::Schema.define(version: 20180323184235) do
     t.string "phone"
     t.string "phone_2"
     t.string "email"
-    t.integer "primary_language", default: 0
-    t.boolean "past_dream_participant", default: false
+    t.integer "primary_language"
+    t.boolean "past_dream_participant"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -110,5 +112,6 @@ ActiveRecord::Schema.define(version: 20180323184235) do
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendances", "courses_students"
   add_foreign_key "sessions", "courses"
 end
