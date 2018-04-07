@@ -13,6 +13,8 @@ class Api::StudentsController < Api::BaseController
     p params[:first_name]
     p params[:last_name]
 		students = Student.where(:first_name => params[:first_name], :last_name => params[:last_name])
+    p "results:"
+    p json: students
     render json: students
 	end
 
