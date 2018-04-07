@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20180323184235) do
     t.string "phone"
     t.string "phone_2"
     t.string "email"
-    t.integer "primary_language", default: 0
-    t.boolean "past_dream_participant", default: false
+    t.integer "primary_language"
+    t.boolean "past_dream_participant"
   end
 
   create_table "teachers", force: :cascade do |t|
