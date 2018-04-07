@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20180407043757) do
     t.boolean "is_synced", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "courses_student_id"
+    t.index ["courses_student_id"], name: "index_attendances_on_courses_student_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -110,5 +112,6 @@ ActiveRecord::Schema.define(version: 20180407043757) do
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendances", "courses_students"
   add_foreign_key "sessions", "courses"
 end
