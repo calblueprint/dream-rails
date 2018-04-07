@@ -47,7 +47,6 @@ class Api::StudentsController < Api::BaseController
         :first_name,
         :last_name,
         :birthday,
-        # :year,
         :address,
         :dream_id,
         :nickname,
