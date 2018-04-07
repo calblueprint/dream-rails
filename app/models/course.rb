@@ -10,6 +10,7 @@
 #
 
 class Course < ApplicationRecord
+	enum level: {'Young Stars': 0, 'Montessori': 1, 'Summer Camp': 2, 'A Ganar': 3, 'Music': 4, 'Other': 5}
   has_many :courses_students
   has_many :students, :through => :courses_students
   has_and_belongs_to_many :teachers
