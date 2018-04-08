@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'sessions', to: 'courses#sessions'
       get 'teachers', to: 'courses#teachers'
       get 'students', to: 'courses#students'
+      get 'attendances', to: 'courses#recent_attendances'
     end
 
   	resources :teachers do
@@ -27,6 +28,6 @@ Rails.application.routes.draw do
 
     resources :courses_students do
     end
-    
+
   end
 end

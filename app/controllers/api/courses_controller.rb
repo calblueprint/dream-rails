@@ -94,6 +94,17 @@ class Api::CoursesController < Api::BaseController
     end
   end
 
+  def recent_attendances
+    course = Course.find(params[:course_id])
+    if !course.nil?
+      dateDict = course.attendances.index_by(&:date)
+      sorted = dateDict.keys.sort_by { |e| Date.parse e }.map { |e| dateDict[e] }
+      render json: { attendances: sorted.last(5)}
+    else
+      render_error_response(:forbidden, ["Could not retrieve sessions."])
+    end
+  end
+
   private
 
   def update_sessions(course, errors)
