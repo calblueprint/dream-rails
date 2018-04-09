@@ -97,7 +97,7 @@ class Api::CoursesController < Api::BaseController
   def recent_attendances
     course = Course.find(params[:course_id])
     if !course.nil?
-      dateDict = course.attendances.index_by(&:date)
+      dateDict = course.attendances.group_by(&:date)
       sorted = dateDict.keys.sort_by { |e| Date.parse e }.map { |e| dateDict[e] }
       render json: { attendances: sorted.last(5)}
     else

@@ -3,8 +3,7 @@
 # Table name: attendances
 #
 #  id              :integer          not null, primary key
-#  student_id      :integer
-#  course_id       :integer
+#  courses_student_id      :integer
 #  date            :date
 #  attendance_type :integer          default(0)
 #  comment         :string
@@ -16,4 +15,5 @@
 class Attendance < ApplicationRecord
 	enum program: {'Present': 0, 'Unexcused Absent': 1, 'Excused Absent': 2, 'Unexcused Late': 3, 'Excused Late': 4}
   belongs_to :courses_student
+	delegate :course_id, :student_id, to: :courses_student
 end
