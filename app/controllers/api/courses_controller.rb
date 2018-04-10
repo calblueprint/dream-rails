@@ -106,6 +106,25 @@ class Api::CoursesController < Api::BaseController
     end
   end
 
+  def month_attendances
+    course = Course.find(params[:course_id])
+    date = Date.parse params[:date]
+    if !course.nil?
+      dateDict = course.attendances.group_by(&:date)
+      monthDict = dateDict.keys.group_by { |a| Date.parse(a).beginning_of_month }
+      dates = monthDict[date.beginning_of_month]
+      if dates.nil?
+        render json: {}
+      else
+        dates.sort_by! { |e| Date.parse e}
+        monthAttendances = Hash[dates.collect { |date| [date, dateDict[date]] } ]
+        render json: monthAttendances.transform_values { |a| a.map { |e| AttendanceSerializer.new(e)}}
+      end
+    else
+      render_error_response(:forbidden, ["Could not retrieve sessions."])
+    end
+  end
+
   private
 
   def update_sessions(course, errors)

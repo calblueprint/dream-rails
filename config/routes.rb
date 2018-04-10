@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'teachers', to: 'courses#teachers'
       get 'students', to: 'courses#students'
       get 'attendances', to: 'courses#recent_attendances'
+      get 'monthAttendances', to: 'courses#month_attendances'
     end
 
   	resources :teachers do
