@@ -98,8 +98,9 @@ class Api::CoursesController < Api::BaseController
     course = Course.find(params[:course_id])
     if !course.nil?
       dateDict = course.attendances.group_by(&:date)
-      sorted = dateDict.keys.sort_by { |e| Date.parse e }.map { |e| dateDict[e] }
-      render json: { attendances: sorted.last(5)}
+      sortedKeys = dateDict.keys.sort_by { |e| Date.parse e }.last(5)
+      recentsDict = dateDict.keep_if {|k,_| sortedKeys.include? k }
+      render json: recentsDict.transform_values { |a| a.map { |e| AttendanceSerializer.new(e)} }
     else
       render_error_response(:forbidden, ["Could not retrieve sessions."])
     end
