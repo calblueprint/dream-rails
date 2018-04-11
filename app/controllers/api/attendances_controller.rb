@@ -54,7 +54,6 @@ class Api::AttendancesController < Api::BaseController
       :date,
       :attendance_type,
       :comment,
-      :is_synced,
     )
   end
 
@@ -63,7 +62,6 @@ class Api::AttendancesController < Api::BaseController
       :id,
       :attendance_type,
       :comment,
-      :is_synced
     )
   end
 end

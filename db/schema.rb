@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409072028) do
+ActiveRecord::Schema.define(version: 20180411092821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20180409072028) do
     t.string "date"
     t.integer "attendance_type", default: 0
     t.string "comment"
-    t.boolean "is_synced", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "courses_student_id"

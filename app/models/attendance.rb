@@ -7,7 +7,6 @@
 #  date            :date
 #  attendance_type :integer          default(0)
 #  comment         :string
-#  is_synced       :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
