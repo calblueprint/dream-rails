@@ -28,10 +28,10 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :courses_students do
-    end
-
-    resources :courses_students do
+    resources :courses_students, only: [:show, :index] do
+      collection do
+        delete :destroy
+      end
     end
     
   end

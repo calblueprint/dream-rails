@@ -21,7 +21,7 @@ class Api::CoursesStudentsController < ApplicationController
   end
 
   def destroy
-    courses_student = CoursesStudent.find(params[:id])
+    courses_student = CoursesStudent.find_by(courses_student_params)
     if courses_student.destroy
       render json: courses_student
     else
