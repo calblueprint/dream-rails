@@ -63,7 +63,7 @@ def make_teacher_courses
     )
     CoursesTeacher.create(
       course_id: course.id,
-      teacher_id: course.id % ($teachers.length - 1) + 2, 
+      teacher_id: course.id % ($teachers.length - 1) + 2,
     )
   end
 end
@@ -129,9 +129,22 @@ def make_courses_students
   end
 end
 
+def make_attendances
+  six_months_ago = Date.yesterday.advance(months: -6)
+  CoursesStudent.all.each do |student|
+    1.upto(10) do |k|
+      attendance = Attendance.create(
+        courses_student_id: student.id,
+        date: six_months_ago.advance(days: k)
+      )
+    end
+  end
+end
+
 make_teachers
 make_courses
 make_teacher_courses
 make_sessions
 make_students
 make_courses_students
+make_attendances

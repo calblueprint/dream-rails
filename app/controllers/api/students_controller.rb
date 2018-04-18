@@ -7,7 +7,12 @@ class Api::StudentsController < Api::BaseController
     else
 		  render json: Student.all
     end
-  end
+	end
+
+	def search
+		students = Student.where(:first_name => params[:first_name], :last_name => params[:last_name])
+    render json: students
+	end
 
 	def show
     student = Student.find(params[:id])
@@ -47,7 +52,6 @@ class Api::StudentsController < Api::BaseController
         :first_name,
         :last_name,
         :birthday,
-        # :year,
         :address,
         :dream_id,
         :nickname,
@@ -63,7 +67,7 @@ class Api::StudentsController < Api::BaseController
         :phone_2,
         :email,
         :primary_language,
-        :past_dream_participant
+        :past_dream_participant,
       )
   	end
 end

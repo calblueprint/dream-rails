@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       get 'sessions', to: 'courses#sessions'
       get 'teachers', to: 'courses#teachers'
       get 'students', to: 'courses#students'
+      get 'attendances', to: 'courses#recent_attendances'
+      get 'monthAttendances', to: 'courses#month_attendances'
     end
 
   	resources :teachers do
@@ -23,10 +25,16 @@ Rails.application.routes.draw do
     end
 
     resources :students do
+      collection do
+        get 'search', to: 'students#search'
+      end
     end
 
-    resources :courses_students do
+    resources :courses_students, only: [:create, :show, :index] do
+      collection do
+        delete :destroy
+      end
     end
-    
+
   end
 end
