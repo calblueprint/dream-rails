@@ -48,7 +48,7 @@ def make_courses
       is_active: Faker::Boolean.boolean,
       course_nickname: Faker::Educator.course,
       site: Faker::Educator.campus,
-      program: Faker::Educator.university,
+      program: rand(0..5),
       notes: Faker::HarryPotter.quote
     )
     $courses << course
@@ -101,7 +101,7 @@ def make_students
       primary_contact: Faker::Name.name,
       primary_contact_phone: Faker::PhoneNumber.phone_number,
       dream_id: m,
-      is_active: [true, false].sample,
+      is_active: rand(0..1),
       sex: rand(0..1),
       facebook_name: Faker::Name.name,
       notes: Faker::TheFreshPrinceOfBelAir.quote,
@@ -111,7 +111,7 @@ def make_students
       phone_2: Faker::PhoneNumber.phone_number,
       email: Faker::Internet.email,
       primary_language: rand(0..2),
-      past_dream_participant: [true, false].sample
+      past_dream_participant: rand(0..1)
     )
     student.id = m
     student.save
