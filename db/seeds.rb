@@ -7,6 +7,14 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 $teachers = []
 $courses = []
+$course_names = ["Math 4: Introduction to Algebra", "English 2: Reading Comprehension",
+                "Music 1: Constructing Harmonies", "CS 4: Data Structures",
+                "Chemistry 2: Molecules and Bonds", "Geography 3: Natural Environments",
+                "Math 7: Introduction to Calculus", "French 5: Reading Analysis",
+                "Biology 2: Human Anatomy", "Stats 1: Introduction to Statistics",
+                ]
+
+Faker::Config.locale = 'es'
 
 def make_teachers
   1.upto(5) do |n|
@@ -40,7 +48,7 @@ def make_courses
   six_months_ago = Date.yesterday.advance(months: -6)
   1.upto(10) do |n|
     course = Course.create(
-      title: Faker::Educator.course,
+      title: $course_names[n],
       teacher_id1: n % ($teachers.length - 1) + 1,
       teacher_id2: n % ($teachers.length - 1) + 2,
       start_date: six_months_ago.advance(months: n),
@@ -99,7 +107,7 @@ def make_students
       created_at: Faker::Date.between(1000.days.ago, 50.days.ago),
       updated_at: Faker::Date.between(49.days.ago, Date.today),
       primary_contact: Faker::Name.name,
-      primary_contact_phone: Faker::PhoneNumber.phone_number,
+      primary_contact_phone: Faker::PhoneNumber.cell_phone,
       dream_id: m,
       is_active: [true, false].sample,
       sex: rand(0..1),
@@ -107,8 +115,8 @@ def make_students
       notes: Faker::TheFreshPrinceOfBelAir.quote,
       document_type: rand(0..5),
       level: rand(0..4),
-      phone: Faker::PhoneNumber.phone_number,
-      phone_2: Faker::PhoneNumber.phone_number,
+      phone: Faker::PhoneNumber.cell_phone,
+      phone_2: Faker::PhoneNumber.cell_phone,
       email: Faker::Internet.email,
       primary_language: rand(0..2),
       past_dream_participant: [true, false].sample
