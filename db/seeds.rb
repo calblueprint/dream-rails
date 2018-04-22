@@ -139,7 +139,7 @@ def make_courses_students
 end
 
 def make_attendances
-  today = Date.today
+  today = Date.today.advance(weeks: -2)
   CoursesStudent.all.each do |student|
     1.upto(10) do |k|
       attendance = Attendance.create(
