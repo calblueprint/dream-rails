@@ -15,6 +15,7 @@ $course_names = ["Math 4: Introduction to Algebra", "English 2: Reading Comprehe
                 ]
 
 Faker::Config.locale = 'es'
+Faker::Config.random = Random.new(42)
 
 def make_teachers
   1.upto(5) do |n|
