@@ -88,7 +88,9 @@ class Api::CoursesController < Api::BaseController
   def students
     course = Course.find(params[:course_id])
     if !course.nil?
-      render json: course.students.order(:id)
+      render json: course.students.order(:id), each_serializer: StudentSerializer, scope: {
+        course_id: course.id
+      }
     else
       render_error_response(:forbidden, ["Could not retrieve students."])
     end
