@@ -139,12 +139,12 @@ def make_courses_students
 end
 
 def make_attendances
-  six_months_ago = Date.yesterday.advance(months: -6)
+  today = Date.today
   CoursesStudent.all.each do |student|
     1.upto(10) do |k|
       attendance = Attendance.create(
         courses_student_id: student.id,
-        date: six_months_ago.advance(days: k)
+        date: today.advance(days: k)
       )
     end
   end
