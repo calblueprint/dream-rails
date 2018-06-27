@@ -1,3 +1,31 @@
+# == Schema Information
+#
+# Table name: students
+#
+#  id                     :integer          not null, primary key
+#  first_name             :string
+#  last_name              :string
+#  birthday               :string
+#  address                :string
+#  nickname               :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  primary_contact        :string
+#  primary_contact_phone  :string
+#  dream_id               :string
+#  is_active              :integer
+#  sex                    :integer
+#  facebook_name          :string
+#  notes                  :string
+#  document_type          :integer
+#  level                  :integer
+#  phone                  :string
+#  phone_2                :string
+#  email                  :string
+#  primary_language       :integer
+#  past_dream_participant :integer
+#
+
 class StudentSerializer < ActiveModel::Serializer
   attributes :id, :attendance_stats, :first_name, :last_name, :birthday, :address, :nickname, :created_at, :updated_at, :primary_contact, :primary_contact_phone, :dream_id, :is_active, :sex, :facebook_name, :notes, :document_type, :level, :phone, :phone_2, :email, :primary_language, :past_dream_participant
 

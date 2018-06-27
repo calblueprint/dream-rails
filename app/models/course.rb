@@ -2,11 +2,19 @@
 #
 # Table name: courses
 #
-#  id         :integer          not null, primary key
-#  title      :string
-#  is_active  :boolean
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  title           :string
+#  is_active       :boolean
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  start_date      :datetime
+#  end_date        :datetime
+#  teacher_id1     :string
+#  teacher_id2     :string
+#  course_nickname :string
+#  site            :string
+#  program         :integer
+#  notes           :string
 #
 
 class Course < ApplicationRecord

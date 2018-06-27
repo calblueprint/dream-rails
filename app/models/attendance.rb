@@ -2,13 +2,13 @@
 #
 # Table name: attendances
 #
-#  id              :integer          not null, primary key
-#  courses_student_id      :integer
-#  date            :date
-#  attendance_type :integer          default(0)
-#  comment         :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                 :integer          not null, primary key
+#  date               :string
+#  attendance_type    :integer          default(0)
+#  comment            :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  courses_student_id :integer
 #
 
 class Attendance < ApplicationRecord

@@ -2,19 +2,28 @@
 #
 # Table name: students
 #
-#  id              :integer          not null, primary key
-#  first_name      :string
-#  last_name       :string
-#  address         :string
-#  year            :integer
-#  nickname        :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  emergency_name  :string
-#  phone           :string
-#  emergency_phone :string
-#  teacher_id      :integer
-#  birthday        :date
+#  id                     :integer          not null, primary key
+#  first_name             :string
+#  last_name              :string
+#  birthday               :string
+#  address                :string
+#  nickname               :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  primary_contact        :string
+#  primary_contact_phone  :string
+#  dream_id               :string
+#  is_active              :integer
+#  sex                    :integer
+#  facebook_name          :string
+#  notes                  :string
+#  document_type          :integer
+#  level                  :integer
+#  phone                  :string
+#  phone_2                :string
+#  email                  :string
+#  primary_language       :integer
+#  past_dream_participant :integer
 #
 
 class Student < ApplicationRecord
