@@ -18,7 +18,10 @@ class Api::TeachersController < Api::BaseController
   end
 
   def show
-    @teacher = Teacher.find(params[:id])
+    puts "lets go"
+    puts params[:id]+".com"
+    @teacher = Teacher.find(params[:id]+".com")
+    puts @teacher
     render json: @teacher
   end
 

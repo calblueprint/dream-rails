@@ -19,9 +19,9 @@ class ApplicationController < ActionController::API
   end
 
   # CanCanCan
-  def current_user
-    current_teacher
-  end
+  # def current_user
+  #   current_teacher
+  # end
 
   def current_ability
     @current_ability ||= ::Abilities::Ability.new(current_user)

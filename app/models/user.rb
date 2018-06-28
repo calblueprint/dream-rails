@@ -25,4 +25,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :teachers
+  self.primary_key = 'email'
 end

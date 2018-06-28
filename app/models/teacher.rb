@@ -30,6 +30,10 @@ class Teacher < ApplicationRecord
 	self.primary_key = 'email__c'
 	self.table_name = 'salesforce.teacher__c'
 
+	def to_param
+    return email__c
+  end
+
 	#PG to Salesforce Mappings
 	# def first_name
 	# 	return 'salesforce.first_name__c'

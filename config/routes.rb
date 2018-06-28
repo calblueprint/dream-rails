@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :teachers, skip: [:registrations, :passwords]
+  devise_for :users, skip: [:registrations, :passwords]
 
-  devise_scope :teacher do
+  devise_scope :user do
     post '/sign_up' => 'registrations#create'
   end
 
-  namespace :api do
+  namespace :api do  
     resources :courses, shallow: true do
       get 'sessions', to: 'courses#sessions'
       get 'teachers', to: 'courses#teachers'
