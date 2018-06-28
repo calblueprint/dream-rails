@@ -30,36 +30,21 @@ class Teacher < ApplicationRecord
 	self.primary_key = 'email__c'
 	self.table_name = 'salesforce.teacher__c'
 
-	def to_param
-    return email__c
-  end
-
 	#PG to Salesforce Mappings
-	# def first_name
-	# 	return 'salesforce.first_name__c'
-	# end
+	def first_name
+		return 'salesforce.first_name__c'
+	end
 
-	# def last_name
-	# 	return 'salesforce.last_name__c'
-	# end
+	def last_name
+		return 'salesforce.last_name__c'
+	end
 
-	# def email
-	# 	return 'salesforce.email__c'
-	# end
+	def email
+		return 'salesforce.email__c'
+	end
 
-	# def phone
-	# 	return 'salesforce.phone_number_1__c'
-	# end
+	def phone
+		return 'salesforce.phone_number_1__c'
+	end
 
-	# def password
-	#  return 'salesforce.password__c'
-	# end
-
-	# def encrypted_password
-	# 	return 'salesforce.password__c'
-	# end
-
-	# def password_confirmation= value
-	#  return 'salesforce.password__c'
-	# end
 end
