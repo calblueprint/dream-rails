@@ -3,7 +3,8 @@ class Api::TeachersController < Api::BaseController
   # load_and_authorize_resource
 
   def update
-    @teacher = Teacher.find(params[:id]+".com")
+    params[:id] = params[:id] + ".com"
+    @teacher = Teacher.find(params[:id])
 
     # Cannot update teacher dream_id if teacher already has courses
     # if (teacher_params[:dream_id].to_s != @teacher.dream_id) && @teacher.courses.present?
@@ -18,7 +19,8 @@ class Api::TeachersController < Api::BaseController
   end
 
   def show
-    @teacher = Teacher.find(params[:id]+".com")
+    params[:id] = params[:id] + ".com"
+    @teacher = Teacher.find(params[:id])
     render json: @teacher
   end
 
@@ -28,7 +30,8 @@ class Api::TeachersController < Api::BaseController
   end
 
   def destroy
-    @teacher = Teacher.find(params[:id]+".com")
+    params[:id] = params[:id] + ".com"
+    @teacher = Teacher.find(params[:id])
     if @teacher.destroy
       render json: @teacher
     else
@@ -37,7 +40,7 @@ class Api::TeachersController < Api::BaseController
   end
 
   def courses
-    teacher = Teacher.find(params[:teacher_id]+".com")
+    teacher = Teacher.find(params[:teacher_id])
     if !teacher.nil?
       render json: teacher.courses.order(:id)
     else

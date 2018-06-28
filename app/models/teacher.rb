@@ -19,18 +19,17 @@
 class Teacher < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
 
   has_many :courses_teachers
   has_many :courses, through: :courses_teachers
-  belongs_to :user
+  belongs_to :user, optional: true
 
 	validates :first_name, :last_name, :email, :phone, presence: true
 	self.primary_key = 'email__c'
 	self.table_name = 'salesforce.teacher__c'
 
 	#PG to Salesforce Mappings
+
 	def first_name
 		return 'salesforce.first_name__c'
 	end
