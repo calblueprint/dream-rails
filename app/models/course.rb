@@ -24,4 +24,34 @@ class Course < ApplicationRecord
   has_many :attendances, :through => :courses_students
   has_and_belongs_to_many :teachers
   has_many :sessions, :dependent => :destroy
+  self.table_name = 'salesforce.class__c'
+
+  #PG to Salesforce Mappings
+  def title
+		return 'salesforce.name'
+	end
+
+	def start_date
+		return 'salesforce.start_date__c'
+	end
+
+	def end_date
+		return 'salesforce.end_date__c'
+	end
+
+	def teacher_id1
+		return 'salesforce.facilitator_1__c'
+	end
+
+	def teacher_id2
+		return 'salesforce.facilitator_2__c'
+	end
+
+	def site
+		return 'salesforce.site__c'
+	end
+
+	def program
+		return 'salesforce.program__c'
+	end
 end

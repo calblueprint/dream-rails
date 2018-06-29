@@ -24,6 +24,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :teachers
+  has_one :teachers
   self.primary_key = 'email'
 end

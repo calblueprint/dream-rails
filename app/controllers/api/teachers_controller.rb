@@ -2,6 +2,15 @@ class Api::TeachersController < Api::BaseController
   # TODO: Uncomment when auth_token is ready
   # load_and_authorize_resource
 
+  def create
+    teacher = Teacher.new(teacher_params)
+    if teacher.save
+      render json: teacher
+    else
+      error_response(teacher)
+    end
+  end
+
   def update
     params[:id] = params[:id] + ".com"
     @teacher = Teacher.find(params[:id])
