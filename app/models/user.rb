@@ -24,6 +24,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_one :teachers
+  has_one :teacher
+  accepts_nested_attributes_for :teacher
   self.primary_key = 'email'
 end
