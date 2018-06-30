@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
 
   	resources :teachers do
-      get 'courses', to: 'teachers#courses'
+      get 'courses', to: 'teachers#courses', :constraints => { :teacher_id => /.+@.+\..*/ }
     end
 
     resources :attendances do
