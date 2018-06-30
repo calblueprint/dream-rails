@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
       @user = User.new(email: params[:teacher][:email], password: params[:teacher][:password], password_confirmation: params[:teacher][:password_confirmation])
       @user.teacher_id = @user.email
       puts "ok"
-      @teacher = Teacher.new(email__c: params[:teacher][:email__c], first_name__c: params[:teacher][:first_name__c], last_name__c: params[:teacher][:last_name__c], phone_number_1__c: params[:teacher][:phone_number_1__c])
+      @teacher = Teacher.new(email__c: params[:teacher][:email], first_name__c: params[:teacher][:first_name__c], last_name__c: params[:teacher][:last_name__c], phone_number_1__c: params[:teacher][:phone_number_1__c])
       @user.save
       @teacher.save
     end
