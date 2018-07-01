@@ -15,6 +15,7 @@ class Api::CoursesController < Api::BaseController
     errors = []
     add_teacher("facilitator_1__c", course, errors)
     add_teacher("facilitator_2__c", course, errors)
+    add_program("program__c", course, errors)
     if errors.present?
       return render_error_response(:forbidden, errors)
     end
@@ -139,7 +140,7 @@ class Api::CoursesController < Api::BaseController
           # Update session if it exists
           session = Session.find(s[:id])
         else
-          # Create sessioni
+          # Create session
           session = Session.new
           session.course_id = course.id
         end
@@ -171,6 +172,17 @@ class Api::CoursesController < Api::BaseController
     session.start_time = s_params[:start_time]
     session.end_time = s_params[:end_time]
     session.number = s_params[:number]
+  end
+
+  def add_program(pName, course, errors)
+    if course_params[pName].present?
+      if Program.exists?(name: course_params[pName])
+        new_p = Program.where(name: course_params[pName])
+        course.program__c = new_p.pluck(:sfid)[0]
+      else
+        errors << "No Program named " + course_params[pName].to_s
+      end
+    end
   end
 
   def add_teacher(tID, course, errors)
@@ -211,6 +223,7 @@ class Api::CoursesController < Api::BaseController
       :end_date__c,
       :facilitator_1__c,
       :facilitator_2__c,
+      :program__c,
       :course_nickname,
       :site,
       :program,
