@@ -42,7 +42,7 @@ class Api::TeachersController < Api::BaseController
   def courses
     teacher = Teacher.find(params[:teacher_id])
     if !teacher.nil?
-      render json: teacher.courses.order(:id)
+      render json: Course.where(facilitator_1__c: teacher.sfid).or(Course.where(facilitator_2__c: teacher.sfid)).order(:id)
     else
       render_error_response(:forbidden, ["Could not retrieve courses."])
     end
