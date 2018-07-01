@@ -9,5 +9,4 @@
 class CoursesTeacher < ApplicationRecord
   belongs_to :course
   belongs_to :teacher 
-  # self.table_name = 'salesforce.class__c_teacher__c'
 end

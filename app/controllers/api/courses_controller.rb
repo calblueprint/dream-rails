@@ -12,10 +12,9 @@ class Api::CoursesController < Api::BaseController
 
   def create
     course = Course.new(course_params)
-
     errors = []
-    add_teacher("teacher_id1", course, errors)
-    add_teacher("teacher_id2", course, errors)
+    add_teacher("facilitator_1__c", course, errors)
+    add_teacher("facilitator_2__c", course, errors)
     if errors.present?
       return render_error_response(:forbidden, errors)
     end
@@ -79,7 +78,7 @@ class Api::CoursesController < Api::BaseController
   def teachers
     course = Course.find(params[:course_id])
     if !course.nil?
-      render json: { teachers: course.teachers }
+      render json: { teachers: [course.facilitator_1__c, course.facilitator_2__c] }
     else
       render_error_response(:forbidden, ["Could not retrieve course teachers."])
     end
@@ -174,13 +173,17 @@ class Api::CoursesController < Api::BaseController
     session.number = s_params[:number]
   end
 
-  def add_teacher(t_id, course, errors)
-    if course_params[t_id].present?
-      if Teacher.exists?(dream_id: course_params[t_id])
-        new_t = Teacher.where(dream_id: course_params[t_id])
-        course.teachers << new_t
+  def add_teacher(tID, course, errors)
+    if course_params[tID].present?
+      if Teacher.exists?(email__c: course_params[tID])
+        new_t = Teacher.where(email__c: course_params[tID])
+        if tID == "facilitator_1__c"
+          course.facilitator_1__c = new_t.pluck(:sfid)[0]
+        else
+          course.facilitator_2__c = new_t.pluck(:sfid)[0]
+        end
       else
-        errors << "No teacher with ID " + course_params[t_id].to_s
+        errors << "No teacher with email " + course_params[tID].to_s
       end
     end
   end
@@ -202,12 +205,12 @@ class Api::CoursesController < Api::BaseController
 
   def course_params
     params.require(:course).permit(
-      :title,
+      :title__c,
       :is_active,
-      :start_date,
-      :end_date,
-      :teacher_id1,
-      :teacher_id2,
+      :start_date__c,
+      :end_date__c,
+      :facilitator_1__c,
+      :facilitator_2__c,
       :course_nickname,
       :site,
       :program,
