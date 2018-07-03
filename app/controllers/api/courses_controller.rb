@@ -45,13 +45,13 @@ class Api::CoursesController < Api::BaseController
       return render_error_response(:forbidden, errors)
     end
 
-    update_teacher("teacher_id1", course, errors)
-    update_teacher("teacher_id2", course, errors)
-    if errors.present?
-      return render_error_response(:forbidden, errors)
-    end
-
-    if course.update(course_params)
+    if course.update(course_update_params)
+      update_teacher("facilitator_1__c", course, errors)
+      update_teacher("facilitator_2__c", course, errors)
+      if errors.present?
+        return render_error_response(:forbidden, errors)
+      end
+      course.save
       render json: course
     else
       render_error_response(:forbidden, course.errors.full_messages)
@@ -201,13 +201,9 @@ class Api::CoursesController < Api::BaseController
   end
 
   def update_teacher(t_id, course, errors)
-    course_teacher_id = course.attributes[t_id]
-    if course_teacher_id != course_params[t_id]
-      # Remove old teacher
-      if course_teacher_id.present?
-        filtered_teachers = course.teachers.select { |old_t| old_t.dream_id != course_teacher_id }
-        course.teachers = filtered_teachers
-      end
+    course_teacher_sfid = course.attributes[t_id]
+    course_teacher_email__c = Teacher.where(sfid: course_teacher_sfid).pluck(:email__c)[0]
+    if course_teacher_email__c != course_params[t_id]
       # Add new teacher
       add_teacher(t_id, course, errors)
     end
@@ -224,6 +220,21 @@ class Api::CoursesController < Api::BaseController
       :facilitator_1__c,
       :facilitator_2__c,
       :program__c,
+      :course_nickname,
+      :site,
+      :program,
+      :notes
+    )
+  end
+
+  def course_update_params
+    params.require(:course).permit(
+      :title__c,
+      :is_active,
+      :start_date__c,
+      :end_date__c,
+      :facilitator_1__c,
+      :facilitator_2__c,
       :course_nickname,
       :site,
       :program,
