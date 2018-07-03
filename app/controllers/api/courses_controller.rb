@@ -191,8 +191,14 @@ class Api::CoursesController < Api::BaseController
         new_t = Teacher.where(email__c: course_params[tID])
         if tID == "facilitator_1__c"
           course.facilitator_1__c = new_t.pluck(:sfid)[0]
+          course.f1_email__c = new_t.pluck(:email__c)[0]
+          course.f1_first_name__c = new_t.pluck(:first_name__c)[0]
+          course.f1_last_name__c = new_t.pluck(:last_name__c)[0]
         else
           course.facilitator_2__c = new_t.pluck(:sfid)[0]
+          course.f2_email__c = new_t.pluck(:email__c)[0]
+          course.f2_first_name__c = new_t.pluck(:first_name__c)[0]
+          course.f2_last_name__c = new_t.pluck(:last_name__c)[0]
         end
       else
         errors << "No teacher with email " + course_params[tID].to_s
