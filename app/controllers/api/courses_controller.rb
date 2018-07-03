@@ -239,8 +239,6 @@ class Api::CoursesController < Api::BaseController
       :is_active,
       :start_date__c,
       :end_date__c,
-      :facilitator_1__c,
-      :facilitator_2__c,
       :course_nickname,
       :site,
       :program,
