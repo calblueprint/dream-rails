@@ -10,7 +10,7 @@ class Api::StudentsController < Api::BaseController
 	end
 
 	def search
-		students = Student.where(:first_name => params[:first_name], :last_name => params[:last_name])
+		students = Student.where(first_name__c: params[:first_name__c], last_name__c: params[:last_name__c])
     render json: students
 	end
 
@@ -49,25 +49,25 @@ class Api::StudentsController < Api::BaseController
 	private
   	def student_params
   		params.require(:student).permit(
-        :first_name,
-        :last_name,
-        :birthday,
-        :address,
-        :dream_id,
-        :nickname,
-        :primary_contact,
-        :primary_contact_phone,
-        :is_active,
-        :sex,
-        :facebook_name,
-        :notes,
-        :document_type,
-        :level,
-        :phone,
-        :phone_2,
-        :email,
-        :primary_language,
-        :past_dream_participant,
+        :first_name__c,
+        :last_name__c,
+        :date_of_birth__c,
+        :direccion__c,
+        :nickname__c,
+        :Contacto_Primario_Name__c,
+        :Contacto_Primario_Phone__c,
+        # :is_active,
+        :sex__c,
+        :usuario_de_facebook__c,
+        :notes__c,
+        :tipo_de_documento__c,
+        # :level,
+        :phone_number_1__c,
+        :phone_number_2__c,
+        :email__c,
+        :idioma_principal__c,
+        :nationality__c,
+        # :past_dream_participant,
       )
   	end
 end

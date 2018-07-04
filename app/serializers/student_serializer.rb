@@ -1,29 +1,32 @@
 # == Schema Information
 #
-# Table name: students
+# Table name: salesforce.student__c
 #
-#  id                     :integer          not null, primary key
-#  first_name             :string
-#  last_name              :string
-#  birthday               :string
-#  address                :string
-#  nickname               :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  primary_contact        :string
-#  primary_contact_phone  :string
-#  dream_id               :string
-#  is_active              :integer
-#  sex                    :integer
-#  facebook_name          :string
-#  notes                  :string
-#  document_type          :integer
-#  level                  :integer
-#  phone                  :string
-#  phone_2                :string
-#  email                  :string
-#  primary_language       :integer
-#  past_dream_participant :integer
+#  tipo_de_documento__c       :string(4099)
+#  notes__c                   :string(255)
+#  nationality__c             :string(255)
+#  email__c                   :string(80)
+#  first_name__c              :string(50)
+#  name                       :string(80)
+#  last_name__c               :string(50)
+#  isdeleted                  :boolean
+#  systemmodstamp             :datetime
+#  usuario_de_facebook__c     :string(255)
+#  direccion__c               :string(255)
+#  phone_number_2__c          :string(40)
+#  createddate                :datetime
+#  phone_number_1__c          :string(40)
+#  date_of_birth__c           :date
+#  sex__c                     :string(255)
+#  idioma_principal__c        :string(255)
+#  sfid                       :string(18)
+#  id                         :integer          not null, primary key
+#  _hc_lastop                 :string(32)
+#  _hc_err                    :text
+#  nickname__c                :string(25)
+#  contacto_primario_name__c  :string(255)
+#  contacto_primario_phone__c :string(255)
+#  lastmodifieddate           :datetime
 #
 
 class StudentSerializer < ActiveModel::Serializer

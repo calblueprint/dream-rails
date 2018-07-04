@@ -13,4 +13,5 @@ class CoursesStudent < ApplicationRecord
   belongs_to :student
   belongs_to :course
   has_many :attendances, :dependent => :destroy
+  # self.table_name = 'salesforce.participantenrollment__c'
 end
