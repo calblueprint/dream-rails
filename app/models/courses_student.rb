@@ -10,10 +10,11 @@
 #
 
 class CoursesStudent < ApplicationRecord
-  belongs_to :student
-  belongs_to :course
+  belongs_to :student,  foreign_key: "student__c"
+  belongs_to :course, foreign_key: "class__c"
   has_many :attendances, :dependent => :destroy
   self.table_name = 'salesforce.participantenrollment__c'
+  # self.primary_key = 'sfid'
 
   #PG to Salesforce Mappings
 	# def student_id
