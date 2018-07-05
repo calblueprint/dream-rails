@@ -14,5 +14,5 @@
 
 class Session < ApplicationRecord
   belongs_to :course
-  validates :course, :presence => true
+  validates :course_id, :presence => true
 end

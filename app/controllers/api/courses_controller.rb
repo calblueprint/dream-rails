@@ -22,7 +22,7 @@ class Api::CoursesController < Api::BaseController
 
     if course.save
       # Need to wait until have course_id to create sessions
-      update_sessions(course, errors)
+      # update_sessions(course, errors)
       if errors.present?
         return render_error_response(:forbidden, errors)
       else
@@ -132,7 +132,6 @@ class Api::CoursesController < Api::BaseController
   def update_sessions(course, errors)
     # Delete sessions from course not present in params[:sessions]
     delete_sessions(course, errors)
-
     # Create/update modified sessions
     params[:sessions].each do |s|
       if s[:modified]
@@ -146,7 +145,7 @@ class Api::CoursesController < Api::BaseController
         end
 
         update_session_attrs(session, s)
-        if !session.save
+        if !session.save!
           errors << "Session not updated."
         end
       end

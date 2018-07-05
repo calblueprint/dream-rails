@@ -38,13 +38,14 @@ class Student < ApplicationRecord
 	enum is_active: {'Yes': 0, 'No': 1}, _prefix: true
 	enum past_dream_participant: {'Yes': 0, 'No': 1}, _prefix: true
 
-  has_many :courses_students
+  has_many :courses_students, foreign_key: 'student__c'
   has_many :courses, :through => :courses_students
 	has_many :attendances, :through => :courses_students
   validates :first_name, :last_name, :birthday, 
   :phone, presence: true
   self.table_name = 'salesforce.student__c'
-
+  self.primary_key = 'sfid'
+  
   #PG to Salesforce Mappings
 	def first_name
 		return 'salesforce.first_name__c'
@@ -133,7 +134,4 @@ class Student < ApplicationRecord
   def past_dream_participant
   	return
   end
-
-        # :idioma_principal__c,
-        # :nationality__c,
 end
