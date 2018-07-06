@@ -30,13 +30,13 @@
 #
 
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :attendance_stats, :first_name, :last_name, :birthday, :address, :nickname, :created_at, :updated_at, :primary_contact, :primary_contact_phone, :dream_id, :is_active, :sex, :facebook_name, :notes, :document_type, :level, :phone, :phone_2, :email, :primary_language, :past_dream_participant
+  attributes :id, :attendance_stats, :first_name__c, :last_name__c, :date_of_birth__c, :createddate, :lastmodifieddate, :direccion__c, :nickname__c, :contacto_primario_name__c, :contacto_primario_phone__c, :sex__c, :usuario_de_facebook__c, :notes__c, :tipo_de_documento__c, :phone_number_1__c, :phone_number_2__c, :email__c, :idioma_principal__c, :nationality__c
 
   def attendance_stats
       if scope.nil?
         return {num_present: 0, num_late: 0, num_absent: 0}
       end
-      attendances = object.attendances.select {|a| a.course_id == scope[:course_id]}
+      attendances = object.attendances.select {|a| a.class__c == scope[:class__c]}
       attendances = attendances.group_by(&:attendance_type)
       num_present = 0
       num_late = 0

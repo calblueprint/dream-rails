@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180705204105) do
+ActiveRecord::Schema.define(version: 20180706011356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,7 @@ ActiveRecord::Schema.define(version: 20180705204105) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "courses_student_id"
-    t.index ["courses_student_id"], name: "index_attendances_on_courses_student_id"
+    t.string "courses_student_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -42,27 +41,15 @@ ActiveRecord::Schema.define(version: 20180705204105) do
   end
 
   create_table "courses_students", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "course_id"
-    t.string "student_id"
   end
 
   create_table "courses_teachers", id: false, force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "teacher_id", null: false
-  end
-
-  create_table "participantenrollments", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "programs", force: :cascade do |t|
-    t.string "name"
-    t.string "Program_Initials"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -117,15 +104,8 @@ ActiveRecord::Schema.define(version: 20180705204105) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.boolean "admin", default: false
-    t.string "sfid"
-    t.boolean "isdeleted"
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
-  end
-
-  create_table "teachersfs", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -147,5 +127,4 @@ ActiveRecord::Schema.define(version: 20180705204105) do
     t.index ["teacher_id"], name: "index_users_on_teacher_id"
   end
 
-  add_foreign_key "attendances", "courses_students"
 end

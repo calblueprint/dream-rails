@@ -47,91 +47,91 @@ class Student < ApplicationRecord
   self.primary_key = 'sfid'
   
   #PG to Salesforce Mappings
-	def first_name
-		return 'salesforce.first_name__c'
-	end
+	# def first_name
+	# 	return 'salesforce.first_name__c'
+	# end
 
-	def last_name
-		return 'salesforce.last_name__c'
-	end
+	# def last_name
+	# 	return 'salesforce.last_name__c'
+	# end
 
-	def birthday
-		return 'salesforce.date_of_birth__c'
-	end
+	# def birthday
+	# 	return 'salesforce.date_of_birth__c'
+	# end
 
-	def phone
-		return 'salesforce.phone_number_1__c'
-	end
+	# def phone
+	# 	return 'salesforce.phone_number_1__c'
+	# end
 
-	def address
-    return 'salesforce.direccion__c'
-  end
+	# def address
+ #    return 'salesforce.direccion__c'
+ #  end
 
-  def email
-  	return 'salesforce.email__c'
-  end
+ #  def email
+ #  	return 'salesforce.email__c'
+ #  end
 
-  def nickname
-  	return 'salesforce.nickname__c'
-  end
+ #  def nickname
+ #  	return 'salesforce.nickname__c'
+ #  end
 
-  def sex
-  	return 'salesforce.sex__c'
-  end
+ #  def sex
+ #  	return 'salesforce.sex__c'
+ #  end
 
-  def notes
-  	return 'salesforce.notes__c'
-  end
+ #  def notes
+ #  	return 'salesforce.notes__c'
+ #  end
 
-  def created_at
-  	return 'salesforce.CreatedDate'
-  end
+ #  def created_at
+ #  	return 'salesforce.CreatedDate'
+ #  end
 
-  def updated_at
-  	return 'salesforce.LastModifiedDate'
-  end
+ #  def updated_at
+ #  	return 'salesforce.LastModifiedDate'
+ #  end
 
-  def primary_contact
-  	return 'salesforce.Contacto_Primario_Name__c'
-  end
+ #  def primary_contact
+ #  	return 'salesforce.Contacto_Primario_Name__c'
+ #  end
 
-  def primary_contact_phone
-  	return 'salesforce.Contacto_Primario_Phone__c'
-  end
+ #  def primary_contact_phone
+ #  	return 'salesforce.Contacto_Primario_Phone__c'
+ #  end
         
-  def facebook_name
-  	return 'salesforce.usuario_de_facebook__c'
-  end
+ #  def facebook_name
+ #  	return 'salesforce.usuario_de_facebook__c'
+ #  end
 
-  def document_type
-  	return 'salesforce.tipo_de_documento__c'
-  end
+ #  def document_type
+ #  	return 'salesforce.tipo_de_documento__c'
+ #  end
 
-  def phone_2
-  	return 'salesforce.phone_number_2__c'
-  end
+ #  def phone_2
+ #  	return 'salesforce.phone_number_2__c'
+ #  end
 
-  def primary_language
-  	return 'salesforce.idioma_principal__c'
-  end
+ #  def primary_language
+ #  	return 'salesforce.idioma_principal__c'
+ #  end
 
-  def nationality
-  	return 'salesforce.nationality__c'
-  end
-  #inactive      
-  def dream_id
-  	return
-  end
+ #  def nationality
+ #  	return 'salesforce.nationality__c'
+ #  end
+ #  #inactive      
+ #  def dream_id
+ #  	return
+ #  end
 
-  def is_active
-  	return
-  end
+ #  def is_active
+ #  	return
+ #  end
 
-  def level
-  	return
-  end
+ #  def level
+ #  	return
+ #  end
 
-  def past_dream_participant
-  	return
-  end
+ #  def past_dream_participant
+ #  	return
+ #  end
 end

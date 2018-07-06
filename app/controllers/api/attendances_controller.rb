@@ -10,9 +10,9 @@ class Api::AttendancesController < Api::BaseController
 
   def create
     #there may be a more optimal way to search for a coursesStudent association
-    courses_student = CoursesStudent.find_by(student_id: create_params[:student_id],
-      course_id: create_params[:course_id])
-    @attendance = courses_student.attendances.create(create_params.except(:student_id, :course_id))
+    courses_student = CoursesStudent.find_by(student__c: create_params[:student__c],
+    class__c: create_params[:class__c])
+    @attendance = courses_student.attendances.create(create_params.except(:student__c, :class__c))
     if @attendance.save
       render json: @attendance
     else
@@ -49,8 +49,7 @@ class Api::AttendancesController < Api::BaseController
 
   def create_params
     params.require(:attendance).permit(
-      :student_id,
-      :course_id,
+      :courses_students_id,
       :date,
       :attendance_type,
       :comment,
