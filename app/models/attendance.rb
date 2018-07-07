@@ -1,14 +1,20 @@
 # == Schema Information
 #
-# Table name: attendances
+# Table name: salesforce.attendance__c
 #
-#  id                 :integer          not null, primary key
-#  date               :string
-#  attendance_type    :integer          default(0)
-#  comment            :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  courses_student_id :integer
+#  createddate               :datetime
+#  isdeleted                 :boolean
+#  name                      :string(80)
+#  systemmodstamp            :datetime
+#  end_date__c               :date
+#  participant_enrollment__c :string(18)
+#  start_date__c             :date
+#  sfid                      :string(18)       primary key
+#  id                        :integer          not null
+#  _hc_lastop                :string(32)
+#  _hc_err                   :text
+#  notes__c                  :string(255)
+#  attendance_type__c        :float
 #
 
 class Attendance < ApplicationRecord

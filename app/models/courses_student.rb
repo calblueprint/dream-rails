@@ -1,12 +1,17 @@
 # == Schema Information
 #
-# Table name: courses_students
+# Table name: salesforce.participantenrollment__c
 #
-#  id         :integer          not null, primary key
-#  student_id :integer
-#  course_id  :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  createddate    :datetime
+#  isdeleted      :boolean
+#  name           :string(80)
+#  systemmodstamp :datetime
+#  class__c       :string(18)
+#  student__c     :string(18)
+#  sfid           :string(18)       primary key
+#  id             :integer          not null
+#  _hc_lastop     :string(32)
+#  _hc_err        :text
 #
 
 class CoursesStudent < ApplicationRecord

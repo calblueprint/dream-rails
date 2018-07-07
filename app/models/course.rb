@@ -2,7 +2,9 @@
 #
 # Table name: salesforce.class__c
 #
+#  f2_last_name__c  :string(255)
 #  notes__c         :string(255)
+#  f1_last_name__c  :string(255)
 #  facilitator_2__c :string(18)
 #  facilitator_1__c :string(18)
 #  name             :string(80)
@@ -10,19 +12,17 @@
 #  isdeleted        :boolean
 #  systemmodstamp   :datetime
 #  end_date__c      :date
-#  createddate      :datetime
-#  start_date__c    :date
-#  program__c       :string(18)
-#  sfid             :string(18)
-#  id               :integer          not null, primary key
-#  _hc_lastop       :string(32)
-#  _hc_err          :text
-#  f2_last_name__c  :string(255)
-#  f1_last_name__c  :string(255)
 #  f1_first_name__c :string(255)
 #  f2_first_name__c :string(255)
+#  createddate      :datetime
+#  start_date__c    :date
 #  f2_email__c      :string(255)
 #  f1_email__c      :string(255)
+#  program__c       :string(18)
+#  sfid             :string(18)       primary key
+#  id               :integer          not null
+#  _hc_lastop       :string(32)
+#  _hc_err          :text
 #
 
 class Course < ApplicationRecord
