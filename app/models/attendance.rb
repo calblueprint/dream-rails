@@ -19,7 +19,7 @@
 
 class Attendance < ApplicationRecord
 	enum program: {'Present': 0, 'Unexcused Absent': 1, 'Excused Absent': 2, 'Unexcused Late': 3, 'Excused Late': 4}
-  belongs_to :courses_student, foreign_key: 'sfid'
+  belongs_to :courses_student, foreign_key: 'sfid', optional: true
 	delegate :class__c, :student__c, to: :courses_student
 	self.table_name = 'salesforce.attendance__c'
   self.primary_key = 'sfid'
