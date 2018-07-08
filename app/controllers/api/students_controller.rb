@@ -10,8 +10,18 @@ class Api::StudentsController < Api::BaseController
 	end
 
 	def search
-		students = Student.where(first_name__c: params[:first_name__c], last_name__c: params[:last_name__c])
-    render json: students
+    if params[:first_name__c].empty? and params[:last_name__c].empty?
+      render_error_response(:forbidden, ["Search fields are blank."])
+    elsif params[:last_name__c].empty?
+      students = Student.where(first_name__c: params[:first_name__c])
+      render json: students
+    elsif params[:first_name__c].empty?
+      students = Student.where(last_name__c: params[:last_name__c])
+      render json: students
+    else
+  		students = Student.where(first_name__c: params[:first_name__c], last_name__c: params[:last_name__c])
+      render json: students
+    end
 	end
 
 	def show
