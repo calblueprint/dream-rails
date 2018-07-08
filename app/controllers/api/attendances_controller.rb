@@ -41,7 +41,7 @@ class Api::AttendancesController < Api::BaseController
   end
 
   def attendance_item
-    @attendance = Attendance.find_by_id(params[:attendance][:id])
+    @attendance = Attendance.find_by(sfid: params[:attendance][:id])
     if @attendance
       update
     else
