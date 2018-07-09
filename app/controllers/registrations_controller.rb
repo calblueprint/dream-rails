@@ -15,6 +15,8 @@ class RegistrationsController < Devise::RegistrationsController
           @teacher.save
         end
         @user.save
+      else
+        return render_error_response(:forbidden, ["User already exists."])
       end
     end
   end
