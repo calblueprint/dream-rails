@@ -18,5 +18,5 @@
 #
 
 class AttendanceSerializer < ActiveModel::Serializer
-  attributes :id, :start_date__c, :attendance_type__c, :notes__c, :participant_enrollment__c, :student_name__c
+  attributes :id, :start_date__c, :attendance_type__c, :notes__c, :participant_enrollment__c, :student_name__c, :student_id__c
 end

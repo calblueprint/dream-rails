@@ -14,6 +14,7 @@ class Api::AttendancesController < Api::BaseController
     @attendance = Attendance.new(create_params.except(:student_name__c, :id, :isChanged, :participant_enrollment__c, :student__c, :class__c))
     @attendance.participant_enrollment__c = courses_student.sfid
     student = Student.find_by(sfid: create_params[:student__c])
+    @attendance.student_id__c = student.sfid
     @attendance.student_name__c = student.first_name__c + ' ' + student.last_name__c
     if @attendance.save!
       render json: @attendance
@@ -57,7 +58,8 @@ class Api::AttendancesController < Api::BaseController
       :notes__c,
       :student__c,
       :class__c,
-      :student_name__c
+      :student_name__c,
+      :student_id__c,
     )
   end
 
