@@ -15,6 +15,8 @@
 #  _hc_err                   :text
 #  notes__c                  :string(255)
 #  attendance_type__c        :float
+#  student_name__c           :string(255)
+#  student_id__c             :string(18)
 #
 
 class Attendance < ApplicationRecord
