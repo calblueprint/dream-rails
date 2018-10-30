@@ -3,12 +3,13 @@ class Api::TeachersController < Api::BaseController
   # load_and_authorize_resource
 
   def update
+    params[:id] = params[:id] + ".com"
     @teacher = Teacher.find(params[:id])
 
     # Cannot update teacher dream_id if teacher already has courses
-    if (teacher_params[:dream_id].to_s != @teacher.dream_id) && @teacher.courses.present?
-      return render_error_response(:forbidden, ["Cannot change dream ID. Courses are already linked to your account."])
-    end
+    # if (teacher_params[:dream_id].to_s != @teacher.dream_id) && @teacher.courses.present?
+    #   return render_error_response(:forbidden, ["Cannot change dream ID. Courses are already linked to your account."])
+    # end
 
     if @teacher.update(teacher_params)
       render json: @teacher
@@ -18,6 +19,7 @@ class Api::TeachersController < Api::BaseController
   end
 
   def show
+    params[:id] = params[:id] + ".com"
     @teacher = Teacher.find(params[:id])
     render json: @teacher
   end
@@ -28,6 +30,7 @@ class Api::TeachersController < Api::BaseController
   end
 
   def destroy
+    params[:id] = params[:id] + ".com"
     @teacher = Teacher.find(params[:id])
     if @teacher.destroy
       render json: @teacher
@@ -39,7 +42,7 @@ class Api::TeachersController < Api::BaseController
   def courses
     teacher = Teacher.find(params[:teacher_id])
     if !teacher.nil?
-      render json: teacher.courses.order(:id)
+      render json: Course.where(facilitator_1__c: teacher.sfid).or(Course.where(facilitator_2__c: teacher.sfid)).order(:id)
     else
       render_error_response(:forbidden, ["Could not retrieve courses."])
     end
@@ -48,6 +51,7 @@ class Api::TeachersController < Api::BaseController
   private
 
     def teacher_params
-      params.require(:teacher).permit(:first_name, :last_name, :dream_id, :email, :phone)
+      params.require(:teacher).permit(:first_name__c, :last_name__c, :email__c, :phone_number_1__c)
     end
-  end
+    
+end

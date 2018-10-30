@@ -10,10 +10,13 @@ class Api::AttendancesController < Api::BaseController
 
   def create
     #there may be a more optimal way to search for a coursesStudent association
-    courses_student = CoursesStudent.find_by(student_id: create_params[:student_id],
-      course_id: create_params[:course_id])
-    @attendance = courses_student.attendances.create(create_params.except(:student_id, :course_id))
-    if @attendance.save
+    courses_student = CoursesStudent.find_by(student__c: create_params[:student__c], class__c: create_params[:class__c])
+    @attendance = Attendance.new(create_params.except(:student_name__c, :id, :isChanged, :participant_enrollment__c, :student__c, :class__c))
+    @attendance.participant_enrollment__c = courses_student.sfid
+    student = Student.find_by(sfid: create_params[:student__c])
+    @attendance.student_id__c = student.sfid
+    @attendance.student_name__c = student.first_name__c + ' ' + student.last_name__c
+    if @attendance.save!
       render json: @attendance
     else
       error_response(@attendance)
@@ -39,7 +42,7 @@ class Api::AttendancesController < Api::BaseController
   end
 
   def attendance_item
-    @attendance = Attendance.find_by_id(params[:attendance][:id])
+    @attendance = Attendance.find_by(sfid: params[:attendance][:id])
     if @attendance
       update
     else
@@ -49,19 +52,26 @@ class Api::AttendancesController < Api::BaseController
 
   def create_params
     params.require(:attendance).permit(
-      :student_id,
-      :course_id,
-      :date,
-      :attendance_type,
-      :comment,
+      :participant_enrollment__c,
+      :start_date__c,
+      :attendance_type__c,
+      :notes__c,
+      :student__c,
+      :class__c,
+      :student_name__c,
+      :student_id__c,
     )
   end
 
   def update_params
     params.require(:attendance).permit(
       :id,
-      :attendance_type,
-      :comment,
+      :participant_enrollment__c,
+      :start_date__c,
+      :attendance_type__c,
+      :notes__c,
+      :student__c,
+      :class__c,
     )
   end
 end

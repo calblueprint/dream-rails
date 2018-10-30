@@ -9,11 +9,15 @@ class Api::CoursesStudentsController < ApplicationController
   end
 
   def create
-    courses_student = CoursesStudent.new(courses_student_params)
-    if courses_student.save
-      render json: courses_student
+    if CoursesStudent.exists?(class__c: courses_student_params[:class__c], student__c: courses_student_params[:student__c])
+      return render_error_response(:forbidden, ["Student already enrolled in this course."])
     else
-      error_response(courses_student)
+      courses_student = CoursesStudent.new(courses_student_params)
+      if courses_student.save
+        render json: courses_student
+      else
+        error_response(courses_student)
+      end
     end
   end
 
@@ -32,8 +36,8 @@ class Api::CoursesStudentsController < ApplicationController
   # private
   def courses_student_params
     params.require(:courses_student).permit(
-      :student_id,
-      :course_id
+      :student__c,
+      :class__c
     )
   end
 

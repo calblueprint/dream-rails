@@ -40,7 +40,7 @@ gem 'annotate', '~> 2.7.2'
 
 gem 'active_model_serializers', '~> 0.10.0'
 
-gem 'devise'
+gem 'devise', git: 'https://github.com/plataformatec/devise'
 
 # gem 'rails-erd', require: false, group: :development
 

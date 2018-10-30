@@ -10,8 +10,18 @@ class Api::StudentsController < Api::BaseController
 	end
 
 	def search
-		students = Student.where(:first_name => params[:first_name], :last_name => params[:last_name])
-    render json: students
+    if params[:first_name__c].empty? and params[:last_name__c].empty?
+      render_error_response(:forbidden, ["Search fields are blank."])
+    elsif params[:last_name__c].empty?
+      students = Student.where(first_name__c: params[:first_name__c])
+      render json: students
+    elsif params[:first_name__c].empty?
+      students = Student.where(last_name__c: params[:last_name__c])
+      render json: students
+    else
+  		students = Student.where(first_name__c: params[:first_name__c], last_name__c: params[:last_name__c])
+      render json: students
+    end
 	end
 
 	def show
@@ -49,25 +59,25 @@ class Api::StudentsController < Api::BaseController
 	private
   	def student_params
   		params.require(:student).permit(
-        :first_name,
-        :last_name,
-        :birthday,
-        :address,
-        :dream_id,
-        :nickname,
-        :primary_contact,
-        :primary_contact_phone,
-        :is_active,
-        :sex,
-        :facebook_name,
-        :notes,
-        :document_type,
-        :level,
-        :phone,
-        :phone_2,
-        :email,
-        :primary_language,
-        :past_dream_participant,
+        :first_name__c,
+        :last_name__c,
+        :date_of_birth__c,
+        :direccion__c,
+        :nickname__c,
+        :contacto_primario_name__c,
+        :contacto_primario_phone__c,
+        # :is_active,
+        :sex__c,
+        :usuario_de_facebook__c,
+        :notes__c,
+        :tipo_de_documento__c,
+        # :level,
+        :phone_number_1__c,
+        :phone_number_2__c,
+        :email__c,
+        :idioma_principal__c,
+        :nationality__c,
+        # :past_dream_participant,
       )
   	end
 end

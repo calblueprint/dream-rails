@@ -1,18 +1,28 @@
 # == Schema Information
 #
-# Table name: attendances
+# Table name: salesforce.attendance__c
 #
-#  id              :integer          not null, primary key
-#  courses_student_id      :integer
-#  date            :date
-#  attendance_type :integer          default(0)
-#  comment         :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  createddate               :datetime
+#  isdeleted                 :boolean
+#  name                      :string(80)
+#  systemmodstamp            :datetime
+#  end_date__c               :date
+#  participant_enrollment__c :string(18)
+#  start_date__c             :date
+#  sfid                      :string(18)       primary key
+#  id                        :integer          not null
+#  _hc_lastop                :string(32)
+#  _hc_err                   :text
+#  notes__c                  :string(255)
+#  attendance_type__c        :float
+#  student_name__c           :string(255)
+#  student_id__c             :string(18)
 #
 
 class Attendance < ApplicationRecord
 	enum program: {'Present': 0, 'Unexcused Absent': 1, 'Excused Absent': 2, 'Unexcused Late': 3, 'Excused Late': 4}
-  belongs_to :courses_student
-	delegate :course_id, :student_id, to: :courses_student
+  belongs_to :courses_student, foreign_key: 'sfid', optional: true
+	delegate :class__c, :student__c, to: :courses_student
+	self.table_name = 'salesforce.attendance__c'
+  self.primary_key = 'sfid'
 end
